@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+
+<!-- Single Bookie Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/singleBookie.css' %}"/>
+
+<!-- myBets  Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/myBets.css' %}"/>
+
+<!-- pagination Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/pagination.css' %}" />
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection myBetsPage">
+
+    </div>
+    <!-- End pageTitle Section --> 
+
+    <div class="bookieBetsTitleSection myBetsPage">
+
+        <div class="title">
+            <span class="titleLine"></span>
+
+        {% if type == "all" %}
+
+                <p class="bookieBetsTitle">Alle Wetten ({{number_of_bets}})</p>
+            </div>
+
+            <div class="betTypes">
+                <a href="{% url 'bets' 'all' %}" class="active">Alle</a>
+                <a href="{% url 'bets' 'open' %}">offen</a>
+                <a href="{% url 'bets' 'ended' %}">abgeschlossen</a>
+            </div>
+
+        {% elif type == "open" %}
+
+                <p class="bookieBetsTitle">Offene Wetten ({{number_of_bets}})</p> 
+            </div>
+
+            <div class="betTypes">
+                <a href="{% url 'bets' 'all' %}">Alle</a>
+                <a href="{% url 'bets' 'open' %}" class="active">offen</a>
+                <a href="{% url 'bets' 'ended' %}">abgeschlossen</a>
+            </div>
+
+        {% else %}
+                <p class="bookieBetsTitle">Abgeschlossene Wetten ({{number_of_bets}})</p>
+            </div>
+            <div class="betTypes">
+                <a href="{% url 'bets' 'all' %}">Alle</a>
+                <a href="{% url 'bets' 'open' %}">offen</a>
+                <a href="{% url 'bets' 'ended' %}"  class="active">abgeschlossen</a>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- Bookie Bets Sektion --> 
+    <div class="bookieBetsSection myBetsPage">
+        {% if bets|length == 0 %}
+            <p class="noBetAvailible">Noch keine Wetten!</p>
+        {% else %}
+
+            <!-- Bookie Bets Table -->
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Datum</th>
+                        <th>Begegnung</th>
+                        <th>Wettanbieter</th>
+                        <th>Wette</th>
+                        <th>Quote</th>
+                        <th>Einsatz</th>
+                        <th>Ergebnis</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    
+                    {% if type == "open" %}
+
+                        {% for bet in bets reversed %}
+
+                            <!-- Table Row -->
+                            <tr class="mobile dateLeague">
+                                <td>
+                                    <p>{{bet.match.date|datetimeformat}}</p>
+                                    <p>{{bet.match.league_name}}</p>
+                                </td>
+                            </tr>
+
+                            <tr class="{{bet.result}} matchData">
+                                <td class="desktop">
+                                    <p>{{bet.match.date|datetimeformat}}</p>
+                                </td>
+                                <td>
+                                    <p class="matchup" data-tooltip="{{bet.match.league_name}}">{{bet.match.home_team}} - {{bet.match.away_team}}</p>
+                                </td>
+                                <td>{{bet.bookie.name.capitalize}}</td>
+                                <td>{{bet.bet_string}}</td>
+                                <td>{{bet.odd}}</td>
+                                <td>{{bet.stake}}€</td>
+
+                                {% if bet.result == "open" %}
+                                    <td>-</td>
+                                    <td>
+                                        <p class="open">offen</p>
+                                    </td>
+                                {% elif bet.result == "lost" %}
+                                    <td>{{bet.match.home_goals}}:{{bet.match.away_goals}}</td>
+                                    <td>
+                                        <p class="lost">verloren</p>
+                                        <p class="lost amount">- {{bet.win_amount}}€</p>
+                                    </td>
+                                {% else %}
+                                    <td>{{bet.match.home_goals}}:{{bet.match.away_goals}}</td>
+                                    <td>
+                                        <p class="won">gewonnen</p>
+                                        <p class="won amount">+ {{bet.win_amount}}€</p>
+                                    </td>
+                                {% endif%}
+
+                            </tr>
+
+                            <tr class="mobile matchInfo">
+                                <td>
+                                    <div class="matchup">
+                                        <p class="title">Begegnung</p>
+                                        <p class="value">{{bet.match.home_team}} - {{bet.match.away_team}}</p>
+                                    </div>
+                                    
+                                    <div class="betInfos">
+        
+                                        <div class="bet data">
+                                            <p class="title">Wette</p>
+                                            <p class="value">{{bet.bet_string}}</p>
+                                        </div>
+        
+                                        <div class="odd data">
+                                            <p class="title">Quote</p>
+                                            <p class="value">{{bet.odd}}</p>
+                                        </div>
+        
+                                        <div class="bookie data">
+                                            <p class="title">Wettanbieter</p>
+                                            <p class="value">{{bet.bookie.name.capitalize}}</p>
+                                        </div>
+        
+                                        <div class="stake data">
+                                            <p class="title">Einsatz</p>
+                                            <p class="value">{{bet.stake}}€</p>
+                                        </div>
+        
+                                        <div class="result data">
+                                            <p class="title">Ergebnis</p>
+                                            <p class="value">-</p>
+                                        </div>
+        
+                                        <div class="status data">
+                                            
+                                            <p class="title">Status</p>
+                                            <p class="value open">offen</p>
+
+                                        </div>
+        
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    {% else %}
+
+                        {% for bet in bets %}
+
+                            <!-- Table Row -->
+                            <tr class="mobile dateLeague">
+                                <td>
+                                    <p>{{bet.match.date|datetimeformat}}</p>
+                                    <p>{{bet.match.league_name}}</p>
+                                </td>
+                            </tr>
+
+                            <tr class="{{bet.result}} matchData">
+                                <td class="desktop">
+                                    <p>{{bet.match.date|datetimeformat}}</p>
+                                </td>
+                                <td>
+                                    <p class="matchup" data-tooltip="{{bet.match.league_name}}">{{bet.match.home_team}} - {{bet.match.away_team}}</p>
+                                </td>
+                                <td>{{bet.bookie.name.capitalize}}</td>
+                                <td>{{bet.bet_string}}</td>
+                                <td>{{bet.odd}}</td>
+                                <td>{{bet.stake}}€</td>
+
+                                {% if bet.result == "open" %}
+                                    <td>-</td>
+                                    <td>
+                                        <p class="open">offen</p>
+                                    </td>
+                                {% elif bet.result == "lost" %}
+                                    <td>{{bet.match.home_goals}}:{{bet.match.away_goals}}</td>
+                                    <td>
+                                        <p class="lost">verloren</p>
+                                        <p class="lost amount">- {{bet.win_amount}}€</p>
+                                    </td>
+                                {% else %}
+                                    <td>{{bet.match.home_goals}}:{{bet.match.away_goals}}</td>
+                                    <td>
+                                        <p class="won">gewonnen</p>
+                                        <p class="won amount">+ {{bet.win_amount}}€</p>
+                                    </td>
+                                {% endif%}
+
+                            </tr>
+
+                            <tr class="mobile matchInfo">
+                                <td>
+                                    <div class="matchup">
+                                        <p class="title">Begegnung</p>
+                                        <p class="value">{{bet.match.home_team}} - {{bet.match.away_team}}</p>
+                                    </div>
+                                    
+                                    <div class="betInfos">
+        
+                                        <div class="bet data">
+                                            <p class="title">Wette</p>
+                                            <p class="value">{{bet.bet_string}}</p>
+                                        </div>
+        
+                                        <div class="odd data">
+                                            <p class="title">Quote</p>
+                                            <p class="value">{{bet.odd}}</p>
+                                        </div>
+        
+                                        <div class="bookie data">
+                                            <p class="title">Wettanbieter</p>
+                                            <p class="value">{{bet.bookie.name.capitalize}}</p>
+                                        </div>
+        
+                                        <div class="stake data">
+                                            <p class="title">Einsatz</p>
+                                            <p class="value">{{bet.stake}}€</p>
+                                        </div>
+        
+                                        <div class="result data">
+                                            <p class="title">Ergebnis</p>
+                                            {% if bet.result == "open" %}
+                                                <p class="value">-</p>
+                                            {% else %}
+                                                <p class="value">{{bet.match.home_goals}}:{{bet.match.away_goals}}</p>
+                                            {% endif%}
+                                        </div>
+        
+                                        <div class="status data">
+                                            {% if bet.result == "open" %}
+                                                <p class="title">Status</p>
+                                                <p class="value open">offen</p>
+                                            {% elif bet.result == "lost" %}
+                                                <p class="title lost">Verloren</p>
+                                                <p class="value lost">- {{bet.win_amount}}€</p>
+                                            {% else %}
+                                                <p class="title won">Gewonnen</p>
+                                                <p class="value won">+ {{bet.win_amount}}€</p>
+                                            {% endif%}
+                                        </div>
+        
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+        {% endif %}
+    </div>
+    <!-- End Bookie Bets Sektion --> 
+
+    {% include 'pagination.html' with queryset=bets custom_page_range=custom_page_range %}
+</div>
+
+<!-- load myBets page javaScript -->
+<script src="{% static 'js/myBets.js' %}" charset="utf-8"></script>
+
+{% endblock content %}

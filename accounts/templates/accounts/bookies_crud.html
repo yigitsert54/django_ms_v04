@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+
+<!-- Bookie Crud Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bookieCrud.css' %}"/>
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+
+    {% if purpose == "add bookie" %}
+
+        <!-- pageTitle Section -->
+        <div class="pageTitleSection addBookie">
+
+            <!-- Back Button -->
+            <a href="{% url 'bookies' %}" class="accentButton backButton">
+                <i class="ri-arrow-left-s-line"></i>
+            </a>
+
+            <p class="pageTitle">Wettanbieter hinzufügen</p>
+        </div>
+        <!-- End pageTitle Section -->
+
+        <!-- form Section  -->
+        <div class="formSection">
+
+            <div class="dashboardCard formCard addBookie" data-user-bookies="{{bookie_data}}">
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+            
+                    {% for field in form %}
+
+                    <div class="formLabel">
+                        <label for="id_{{field.name}}">{{field.label}}</label>
+                    </div>
+
+                    <div class="formField">
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="formButtons">
+                        <input class="formSubmit" type="submit" value="Hinzufügen">
+                        <a href="{% url 'bookies' %}" class="backButton">Abbrechen</a>
+                    </div>
+                </form>
+                
+            </div>
+
+        </div>
+        <!-- End form Section  -->
+
+    {% elif purpose == "deposit" %}
+
+        <!-- pageTitle Section -->
+        <div class="pageTitleSection addBookie">
+
+            <!-- Back Button -->
+            <a href="{% url 'bookies' %}" class="accentButton backButton">
+                <i class="ri-arrow-left-s-line"></i>
+            </a>
+
+            <p class="pageTitle">{{bookie.name.capitalize}} - Geld einzahlen</p>
+        </div>
+        <!-- End pageTitle Section -->
+
+        <!-- form Section  -->
+        <div class="formSection">
+
+            <div class="dashboardCard formCard addBookie" data-user-bookies="{{bookie_data}}">
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+            
+                    {% for field in form %}
+
+                    <div class="formLabel">
+                        <label for="id_{{field.name}}">{{field.label}}</label>
+                    </div>
+
+                    <div class="formField">
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="formButtons">
+                        <input class="formSubmit" type="submit" value="Einzahlen">
+                        <a href="{% url 'single_bookie' bookie.id %}" class="backButton">Abbrechen</a>
+                    </div>
+                </form>
+                
+            </div>
+
+        </div>
+        <!-- End form Section  -->
+    
+    {% elif purpose == "withdraw" %}
+
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection addBookie">
+
+        <!-- Back Button -->
+        <a href="{% url 'bookies' %}" class="accentButton backButton">
+            <i class="ri-arrow-left-s-line"></i>
+        </a>
+
+        <p class="pageTitle">{{bookie.name.capitalize}} - Geld auszahlen</p>
+    </div>
+    <!-- End pageTitle Section -->
+
+    <!-- form Section  -->
+    <div class="formSection">
+
+        <div class="dashboardCard formCard addBookie" data-user-bookies="{{bookie_data}}">
+
+            <form method="POST" action="" class="moneyCrud">
+                {% csrf_token %}
+        
+                {% for field in form %}
+
+                <div class="formLabel">
+                    <label for="id_{{field.name}}">{{field.label}}</label>
+                </div>
+
+                <div class="formField">
+                    {{field}}
+                </div>
+                {% endfor %}
+
+                <p class="maxAmount">maximal {{bookie.balance}}€</p>
+                
+                <div class="formButtons">
+                    <input class="formSubmit" type="submit" value="Auszahlen">
+                    <a href="{% url 'single_bookie' bookie.id %}" class="backButton">Abbrechen</a>
+                </div>
+            </form>
+            
+        </div>
+
+    </div>
+    <!-- End form Section  -->
+
+    {% endif %}
+
+</div>
+
+<!-- load forms javaScript -->
+<script src="{% static 'js/forms.js' %}" charset="utf-8"></script>
+
+{% endblock content %}

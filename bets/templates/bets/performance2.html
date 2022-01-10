@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+
+<!-- Single Bookie Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/singleBookie.css' %}"/>
+
+<!-- Extra performance Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/performance.css' %}"/>
+
+<!-- pagination Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/pagination.css' %}" />
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection">
+
+        <p class="pageTitle">Performance</p>
+
+    </div>
+    <!-- End pageTitle Section -->
+
+    <!-- Summary Section -->
+    <div class="summarySection">
+
+        <div class="dashboardCard summaryCard">
+            <i class="im im-stackoverflow"></i>
+            <div class="summaryItems">
+                <p class="cardTitle">Anzahl Wetten</p>
+                <p class="cardValue">{{performance.bet_count}}</p>
+            </div>
+
+        </div>
+        
+        <div class="dashboardCard summaryCard">
+            <i class="im im-award"></i>
+            <div class="summaryItems">
+                <p class="cardTitle">Gewonnen</p>
+                <p class="cardValue">{{performance.wins}}</p>
+            </div>
+
+        </div>
+
+        <div class="dashboardCard summaryCard">
+            <i class="im im-pie-chart"></i>
+            <div class="summaryItems">
+                <p class="cardTitle">Winrate</p>
+                <p class="cardValue">{{performance.winrate}}%</p>
+            </div>
+
+        </div>
+
+        <div class="dashboardCard summaryCard">
+            <i class="im im-credit-card"></i>
+            <div class="summaryItems">
+                <p class="cardTitle">Bilanz</p>
+                <p class="cardValue" id="scroll2bets">{{performance.profit_sign}}{{performance.profit}}€</p>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- End Summary Section -->
+
+    <div class="bookieBetsTitleSection">
+        <span class="titleLine"></span>
+        <p class="bookieBetsTitle">Alle abgeschlossene Wetten</p>
+    </div>
+
+    <!-- Bookie Bets Sektion --> 
+    <div class="bookieBetsSection">
+        {% if bets|length == 0 %}
+            <p class="noBetAvailible">Noch keine Wetten!</p>
+        {% else %}
+
+            <!-- Bookie Bets Table -->
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Datum</th>
+                        <th>Begegnung</th>
+                        <th>Wettanbieter</th>
+                        <th>Wette</th>
+                        <th>Quote</th>
+                        <th>Einsatz</th>
+                        <th>Ergebnis</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for bet in bets %}
+
+                    <!-- Table Row -->
+                    <tr class="mobile dateLeague">
+                        <td>
+                            <p>{{bet.match.date|datetimeformat}}</p>
+                            <p>{{bet.match.league_name}}</p>
+                        </td>
+                    </tr>
+
+                    <tr class="{{bet.result}} matchData">
+                        <td class="desktop">
+                            <p>{{bet.match.date|datetimeformat}}</p>
+                        </td>
+                        <td>
+                            <p class="matchup" data-tooltip="{{bet.match.league_name}}">{{bet.match.home_team}} - {{bet.match.away_team}}</p>
+                        </td>
+                        <td>{{bet.bookie.name.capitalize}}</td>
+                        <td>{{bet.bet_string}}</td>
+                        <td>{{bet.odd}}</td>
+                        <td>{{bet.stake}}€</td>
+
+                        {% if bet.result == "open" %}
+                            <td>-</td>
+                            <td>
+                                <p class="open">offen</p>
+                            </td>
+                        {% elif bet.result == "lost" %}
+                            <td>{{bet.match.home_goals}}:{{bet.match.away_goals}}</td>
+                            <td>
+                                <p class="lost">verloren</p>
+                                <p class="lost amount">- {{bet.win_amount}}€</p>
+                            </td>
+                        {% else %}
+                            <td>{{bet.match.home_goals}}:{{bet.match.away_goals}}</td>
+                            <td>
+                                <p class="won">gewonnen</p>
+                                <p class="won amount">+ {{bet.win_amount}}€</p>
+                            </td>
+                        {% endif%}
+
+                    </tr>
+
+                    <tr class="mobile matchInfo">
+                        <td>
+                            <div class="matchup">
+                                <p class="title">Begegnung</p>
+                                <p class="value">{{bet.match.home_team}} - {{bet.match.away_team}}</p>
+                            </div>
+                            
+                            <div class="betInfos">
+
+                                <div class="bet data">
+                                    <p class="title">Wette</p>
+                                    <p class="value">{{bet.bet_string}}</p>
+                                </div>
+
+                                <div class="odd data">
+                                    <p class="title">Quote</p>
+                                    <p class="value">{{bet.odd}}</p>
+                                </div>
+
+                                <div class="bookie data">
+                                    <p class="title">Wettanbieter</p>
+                                    <p class="value">{{bet.bookie.name.capitalize}}</p>
+                                </div>
+
+                                <div class="stake data">
+                                    <p class="title">Einsatz</p>
+                                    <p class="value">{{bet.stake}}€</p>
+                                </div>
+
+                                <div class="result data">
+                                    <p class="title">Ergebnis</p>
+                                    <p class="value">{{bet.match.home_goals}}:{{bet.match.away_goals}}</p>
+                                </div>
+
+                                <div class="status data">
+                                    {% if bet.result == "lost" %}
+                                        <p class="title lost">Verloren</p>
+                                        <p class="value lost">- {{bet.win_amount}}€</p>
+                                    {% else %}
+                                        <p class="title won">Gewonnen</p>
+                                        <p class="value won">+ {{bet.win_amount}}€</p>
+                                    {% endif%}
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+        {% endif %}
+    </div>
+    <!-- End Bookie Bets Sektion --> 
+
+    {% include 'pagination.html' with queryset=bets custom_page_range=custom_page_range %}
+</div>
+
+<!-- load bookies page javaScript -->
+<script src="{% static 'js/singleBookie.js' %}" charset="utf-8"></script>
+{% endblock content %}

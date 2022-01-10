@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block page_name %}
+{{page_name}}
+{% endblock page_name %}
+
+{% block content %}
+
+{% if purpose == "add" %}
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        {{form.as_p}}
+
+        <input type="submit" value="Add Bookie">
+    </form>
+
+{% elif purpose == "deposit" %}
+    <div>Bookie: {{bookie.name.capitalize}}</div>
+    <div>Owner: {{bookie.owner}}</div>
+    <div>Balance: {{bookie.balance}}</div>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        
+        {{form.as_p}}
+
+        <input type="submit" value="Deposit">
+    </form>
+
+{% elif purpose == "withdraw" %}
+    <div>Bookie: {{bookie.name.capitalize}}</div>
+    <div>Owner: {{bookie.owner}}</div>
+    <div>Balance: {{bookie.balance}}</div>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        
+        {{form.as_p}}
+
+        <input type="submit" value="Withdraw">
+    </form>
+{% endif %}
+
+{% endblock content %}

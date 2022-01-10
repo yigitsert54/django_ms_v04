@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+
+{% block page_name %}
+{{page_name}}
+{% endblock page_name %}
+
+{% block content %}
+
+<!-- Summary Sektion --> 
+<div class="summarySektion">
+
+    <!-- Single Summary Card --> 
+    <div class="summaryCard dashboardCard">
+
+        <div class="iconSection">
+            <i class='bx bx-euro summaryIcon'></i>
+        </div>
+
+        <div class="summaryItem">
+            <p class="cardTitle">Wettkapital</p>
+            <p class="summaryValue">{{bookie.balance}}€</p>
+        </div>
+    </div>
+
+    <!-- Single Summary Card --> 
+    <div class="summaryCard dashboardCard">
+
+        <div class="iconSection">
+            <i class='bx bx-hash summaryIcon'></i>
+        </div>
+
+        <div class="summaryItem">
+            <p class="cardTitle">Anzahl Wetten</p>
+            <p class="summaryValue">{{bets_count}}</p>
+        </div>
+    </div>
+
+    <!-- Single Summary Card --> 
+    <div class="summaryCard dashboardCard">
+
+        <div class="iconSection">
+            <i class='bx bx-log-in-circle summaryIcon'></i>
+        </div>
+        
+        <div class="summaryItem">
+            <p class="cardTitle">Eingezahlt</p>
+            <p class="summaryValue">{{bookie.invested_stake}}€</p>
+        </div>
+    </div>
+
+    <!-- Single Summary Card --> 
+    <div class="summaryCard dashboardCard">
+
+        <div class="iconSection">
+            <i class='bx bx-log-out-circle summaryIcon'></i>
+        </div>
+
+        <div class="summaryItem">
+            <p class="cardTitle">Ausgezahlt</p>
+            <p class="summaryValue">{{bookie.withdrawed_stake}}€</p>
+        </div>
+    </div>
+
+</div>
+<!-- End Summary Sektion -->
+
+<div class="bookieActions">
+    <a href="{% url 'deposit_money' bookie.id %}">Einzahlen</a>
+    <a href="{% url 'withdraw_money' bookie.id %}">Auszahlen</a>
+</div>
+
+<div class="bookieBetsSection dashboardCard">
+    {% for bet in bets %}
+    <p class="betDate">{{bet.match.date|datetimeformat}} | {{bet.match.league_name}}</p>
+    <div class="bookieBet {{bet.result}}">
+
+        <div class="matchup">
+            <p class="title">Begegnung</p>
+            <p class="value">{{bet.match.home_team}}<span>-</span>{{bet.match.away_team}}</p>
+        </div>
+
+        <div class="bet">
+            <p class="title">Wette</p>
+            <p class="value">{{bet.bet_string}}</p>
+        </div>
+
+        <div class="odd">
+            <p class="title">Quote</p>
+            <p class="value">{{bet.odd}}</p>
+        </div>
+
+        <div class="stake">
+            <p class="title">Einsatz</p>
+            <p class="value">{{bet.stake}}€</p>
+        </div>
+
+        <div class="standings">
+            <p class="title">Ergebnis</p>
+            <p class="value">{{bet.match.home_goals}}-{{bet.match.away_goals}}</p>
+        </div>
+
+        <div class="result {{bet.result}}">
+
+            <p class="title">{{bet.result_string}}</p>
+
+            {% if bet.result != "open" %}
+
+            <p class="value">
+
+                {% if bet.result == "won" %}
+                    <span>+</span>
+                {% else %}
+                    <span>-</span>
+                {% endif %}
+
+                {{bet.win_amount}}€
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% include 'pagination.html' with queryset=bets custom_page_range=custom_page_range %}
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/faq.css' %}"/>
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection">
+
+        <p class="pageTitle">{{topic.name}} Fragen</p>
+
+    </div>
+    <!-- End pageTitle Section -->
+
+    <!-- All Questions Section -->
+    <div class="questionSection">
+
+        {% for question in topic.question_set.all %}
+
+            <div class="dashboardCard faqCard" id="{{question.id}}">
+                <p class="question">
+                    {{question.question}}
+                    <i class="ri-arrow-down-s-line"></i>
+                </p>
+                <div class="answer">
+                    <p>{{question.answer|safe}}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+    <!-- End All Questions Section -->
+
+</div>
+
+<!-- load faq javaScript -->
+<script src="{% static 'js/faq.js' %}" charset="utf-8"></script>
+{% endblock content %}

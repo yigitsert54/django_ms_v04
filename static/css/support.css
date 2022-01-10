@@ -1,0 +1,185 @@
+main .formSection.supportFormSection {
+  grid-template-columns: 100%;
+}
+
+main .formSection form div.formField .input {
+  min-width: 95%;
+}
+
+main textarea#id_question {
+  height: 100px;
+}
+
+main .requestTitleSection {
+  margin: 3rem 0 2rem;
+  display: flex;
+  align-items: center;
+}
+
+main .requestTitleSection .titleLine {
+  margin-right: 0.85rem;
+}
+
+main .requestTitleSection p {
+  font-weight: 500;
+}
+
+main .dashboardCard.supportCard {
+  padding: 1.2rem;
+}
+
+main .supportCard .requestDate {
+  font-size: 0.8rem;
+  color: #808080;
+}
+
+main .supportCard .supportHeader {
+  padding-bottom: 0.5rem;
+}
+
+main .supportCard .requestDate a.notification {
+  background-color: #f64e60;
+  color: #fff;
+  padding: 1px 4px 2px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 3px;
+  margin-left: 0.33rem;
+}
+
+main .supportCard .requestDate a.notification:hover {
+  background-color: #ee2d41;
+}
+
+main .supportCard .supportContent {
+  display: grid;
+  grid-template-columns: 8fr 3fr;
+}
+
+main .supportCard .supportData {
+  padding-right: 1rem;
+}
+
+main .supportCard .supportData .subject {
+  color: var(--cardTitleColor);
+  font-weight: 600;
+  padding-bottom: 0.33rem;
+}
+
+main .supportCard .supportData .question {
+  font-size: 0.9rem;
+}
+
+main .supportCard .supportContent .supportActions {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 1.5rem;
+}
+
+main .supportContent .supportActions a.showSupport {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #67757c;
+  border: 1.5px solid #dde1e4;
+  border-radius: 4px;
+  text-align: center;
+  padding: 0.33rem 0.66rem;
+  text-decoration: none;
+  transition: 0.15s ease-in;
+}
+
+main .supportContent .supportActions a.showSupport:hover {
+  color: #fff;
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+main .supportContent span.status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+}
+
+main .supportContent span.status.mobile {
+  display: none;
+}
+
+main .supportContent span.status.open {
+  background-color: #fff4de;
+  color: #ffa800;
+  padding: 0.3rem 0.66rem;
+}
+
+main .supportContent span.status.answered {
+  background-color: #e1f0ff;
+  color: #3699ff;
+}
+
+main .supportContent span.status.done {
+  background-color: #c9f7f5;
+  color: #1bc5bd;
+  padding: 0.3rem 0.66rem;
+}
+
+main .singleSupportCard p.title {
+  font-size: 0.9rem;
+  color: var(--cardTitleColor);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+main .singleSupportCard p.value {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+main .singleSupportCard p.value.notAnswered {
+  color: #ef5350;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 970px) {
+  main .supportCard .supportContent {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 890px) {
+  main .supportCard .supportContent {
+    grid-template-columns: 100%;
+  }
+
+  main .supportCard .supportHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.75rem;
+  }
+
+  main .supportCard .supportData .subject {
+    padding-bottom: 0.5rem;
+  }
+
+  main .supportCard .supportData {
+    padding-right: 0rem;
+  }
+
+  main .supportContent span.status.mobile {
+    display: block;
+  }
+
+  main .supportContent span.status.desktop {
+    display: none;
+  }
+
+  main .supportCard .supportContent .supportActions {
+    justify-content: start;
+    margin-top: 1rem;
+  }
+
+  main .supportContent .supportActions a.showSupport {
+    font-size: 0.9rem;
+  }
+}

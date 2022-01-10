@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matchsniper</title>
+
+    <!-- Load Quicksand font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Navbar Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/navbar.css' %}"/>
+
+    {% block styles %}
+    {% endblock styles %}
+
+    <!-- Load all CDNs -->
+    {% include 'xcdns.html' %}
+    
+  </head>
+
+  <body>
+    
+      <!-- Navbar -->
+      {% include 'navbar.html' %}
+      <!-- End Navbar -->
+      
+      <!-- Main -->
+      <main>
+
+        {% if messages %}
+
+          {% for message in messages %}
+              <div class="messageSektion base">
+                  <div class="message">
+                      <p class="{{message.tags}}">
+                          {{message}}
+                          <i class="ri-close-line close"></i>
+                      </p>
+                  </div>
+              </div>
+          {% endfor %}
+
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+      </main>
+      <!-- End Main -->
+
+      <!-- footer Section -->
+      <div class="footer">
+        <div class="footerContent">
+
+          <p>Copyright © {% now 'Y' %} Matchsniper - alle Rechte vorbehalten</p>
+
+          <div class="footerLinks">
+
+            <a href="">Impressum</a>
+            <a href="">Datenschutz</a>
+            <a class="affLink" href="">Partnerprogramm</a>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- load messages javaScript -->
+      <script src="{% static 'js/messages.js' %}" charset="utf-8"></script>
+
+  </body>
+  
+</html>

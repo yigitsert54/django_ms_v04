@@ -1,0 +1,260 @@
+main .summarySection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 1.4rem;
+}
+
+main .dashboardCard {
+  margin: 1.6rem 0 0;
+  background-color: #fff;
+  padding: 1.8rem 1.2rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  box-shadow: 0px 0px 15px 0px rgb(82 63 105 / 5%);
+}
+
+main .summarySection .summaryCard {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0.5rem;
+}
+
+main .summaryCard .summaryItems {
+  display: flex;
+  flex-direction: column;
+}
+
+main .summaryCard i {
+  font-size: 2.3rem;
+  color: var(--accentColor);
+  width: 40%;
+  text-align: center;
+}
+
+main .summaryCard .summaryItems .cardTitle {
+  color: var(--mainColor);
+  font-weight: 550;
+  margin-bottom: 0.6rem;
+}
+
+main .summaryCard .summaryItems .cardValue {
+  color: var(--secColor);
+  font-size: 1.35rem;
+}
+
+main .performanceBookieSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 1.4rem;
+}
+
+main .performanceBookieSection .performanceCard canvas.mobile {
+  display: none !important;
+}
+
+main .performanceBookieSection .performanceCard canvas.desktop {
+  display: block !important;
+}
+
+main .dashboardCard .titleSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+main .dashboardCard .titleSection p.cardTitle {
+  color: var(--cardTitleColor);
+  font-weight: 500;
+}
+
+main span.titleLine {
+  width: 2.2px;
+  background-color: var(--accentColor);
+  height: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.6rem;
+}
+
+main .dashboardCard .titleSection a {
+  color: var(--linkColor);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+main .dashboardCard .titleSection a:hover {
+  text-decoration: underline;
+}
+
+main .dashboardCard .titleSection a.mobileLink {
+  font-size: 1.25rem;
+  display: none;
+}
+
+main .dashboardCard .titleSection a.mobileLink:hover {
+  text-decoration: none;
+}
+
+main .dashboardTable {
+  width: 100%;
+  background-color: transparent;
+  border-collapse: collapse;
+}
+
+main .dashboardTable th {
+  padding: 0 0.5rem 0.75rem;
+  color: #67757c;
+  font-weight: 500;
+  border: 0;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+main .dashboardTable th.title {
+  text-align: left !important;
+}
+
+main .dashboardTable th.value {
+  text-align: center !important;
+  font-weight: 400;
+}
+
+main .dashboardTable tbody tr:hover {
+  background-color: #fafafa;
+}
+
+main .dashboardTable td {
+  padding: 0.75rem 0.5rem;
+  color: #67757c;
+  border: 0;
+  vertical-align: middle;
+}
+
+main .dashboardTable td.title a {
+  text-align: left !important;
+  font-size: 1rem;
+  color: #67757c;
+  text-decoration: none;
+  font-weight: 450;
+}
+
+main .dashboardTable td.title a:hover {
+  text-decoration: underline;
+  color: var(--linkColor);
+}
+
+main .dashboardTable td.value {
+  text-align: center !important;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+main .matchesSection {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  grid-column-gap: 1.4rem;
+}
+
+main .matchesSection .dashboardCard {
+  height: fit-content;
+}
+
+main .matchesSection .dashboardTable td {
+  padding: 1.1rem 0.5rem;
+}
+
+main .matchesSection .dashboardTable td.value {
+  text-align: left !important;
+}
+
+main .matchesSection .dashboardTable tbody tr:hover {
+  cursor: default;
+}
+
+main p.noBetAvailible {
+  color: #67757c;
+  font-size: 0.95rem;
+  padding: 5px 0;
+}
+
+@media only screen and (max-width: 1200px) {
+  main .performanceBookieSection .performanceCard canvas.mobile {
+    display: block !important;
+  }
+
+  main .performanceBookieSection .performanceCard canvas.desktop {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  main .dashboardCard .titleSection a.openbetsLinkDesktop {
+    display: none;
+  }
+
+  main .dashboardCard .titleSection a.openbetsLinkMobile {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  main .summarySection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  main .performanceBookieSection {
+    grid-template-columns: 100%;
+  }
+
+  main .matchesSection {
+    grid-template-columns: 100%;
+  }
+
+  main .dashboardCard .titleSection a.openbetsLinkDesktop {
+    display: block;
+  }
+
+  main .dashboardCard .titleSection a.openbetsLinkMobile {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .matchesSection table .desktop1 {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .matchesSection table .desktop2 {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  main .summarySection {
+    grid-template-columns: 100%;
+  }
+
+  .performanceBookieSection table .desktop1 {
+    display: none;
+  }
+
+  main .dashboardCard .titleSection a.desktopLink {
+    display: none;
+  }
+
+  main .dashboardCard .titleSection a.mobileLink {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .performanceBookieSection table .desktop2 {
+    display: none;
+  }
+}

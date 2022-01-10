@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+
+{% block page_name %}
+
+{% if type == "open" %}
+    {{page_name}} (offen)
+{% elif type == "ended" %}
+    {{page_name}} (abgeschlossen)
+{% else %}
+    {{page_name}} (Alle)
+{% endif %}
+{% endblock page_name %}
+
+{% block content %}
+
+<h4>
+    <a href="{% url 'bets' 'open' %}">Offene Wetten</a>
+
+    <span> | </span>
+    <a href="{% url 'bets' 'ended' %}">Abgeschlossene Wetten</a>
+
+    <span> | </span>
+    <a href="{% url 'bets' 'all' %}">Alle Wetten</a>
+</h4>
+
+{% if type == "open" %}
+
+    {% for bet in bets reversed %}
+        {% if bet.result == "open" %}
+            <div style="margin-bottom: 10px;">
+                {{bet.match.date|datetimeformat}} - {{bet.match.league}} - {{bet.match.home_team}} -
+                {{bet.match.away_team}} - {{bet.bet_type}} - {{bet.odd}} - {{bet.stake}} -
+                {{bet.bookie.name}} - open
+            </div>
+        {% endif %}
+    {% endfor %}
+
+{% elif type == "ended" %}
+
+    {% for bet in bets %}
+        {% if bet.match.status == "ended" %}
+            <div style="margin-bottom: 10px;">
+                {{bet.match.date|datetimeformat}} - {{bet.match.league}} - {{bet.match.home_team}} -
+                {{bet.match.away_team}} - {{bet.bet_type}} - {{bet.odd}} - {{bet.stake}} -
+                {{bet.bookie.name}} - {{bet.match.home_goals}} - {{bet.match.away_goals}} -
+                {{bet.result}}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+{% else %}
+
+    {% for bet in bets %}
+    <div style="margin-bottom: 10px;">
+        {{bet.match.date|datetimeformat}} - {{bet.match.league}} - {{bet.match.home_team}} -
+        {{bet.match.away_team}} - {{bet.bet_type}} - {{bet.odd}} - {{bet.stake}} -
+        {{bet.bookie.name}} -
+
+        {% if bet.match.status == "ended" %}
+            {{bet.match.home_goals}} - {{bet.match.away_goals}} - {{bet.result}}
+        {% else %}
+            open
+        {% endif %}
+
+    </div>
+    {% endfor %}
+
+{% endif %}
+
+{% endblock content %}

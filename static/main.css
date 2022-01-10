@@ -1,0 +1,137 @@
+:root {
+  --color-main: #5aa5b9;
+  --color-main-light: #e6faff;
+  --color-sub: #3f4156;
+  --color-sub-light: #51546e;
+  --color-sub-lighter: #ededfd;
+  --color-text: #737373;
+  --color-gray: #8b8b8b;
+  --color-light: #e5e7eb;
+  --color-light-gray: #767676;
+  --color-bg: #f8fafd;
+  --color-white: #fffefd;
+  --color-white-light: #f3f3f3;
+  --color-success: #359e64;
+  --color-success-bg: #def8e8;
+  --color-error: #fc4b0b;
+  --color-error-bg: #fff2ee;
+  --font-base: "Poppins", arial, helvetica, "Segoe UI", roboto, ubuntu,
+    sans-serif;
+  --font-monospace: "Fira Code", "Courier New", courier, monospace;
+  --font-regular: 300;
+  --font-medium: 500;
+  --font-bold: 700;
+  --generic-shadow: 1px 1px 5px #00000010;
+  --generic-transition: all 0.3s ease-in-out;
+}
+
+html {
+  font-size: 50%;
+}
+
+@media only screen and (min-width: 1200px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  html {
+    font-size: 56.25%;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  color: inherit;
+  font-size: inherit;
+  font-family: var(--font-base);
+}
+
+body {
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.header {
+  position: sticky;
+  z-index: 111;
+  background-color: #2d2d39;
+  padding: 2.5rem 0;
+}
+
+.header > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerNav > ul {
+  display: inline-flex;
+  align-items: center;
+  list-style: none;
+  gap: 6.5rem;
+}
+
+.btn {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background-color: var(--color-light);
+  font-weight: var(--font-medium);
+  color: var(--color-sub);
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 1.6rem;
+  outline-width: 0;
+  outline-color: transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.btnSub {
+  background-color: var(--color-sub-light);
+  color: var(--color-white);
+}
+
+.menuItem > a {
+  color: var(--color-light);
+  font-weight: 300;
+}
+
+a {
+  padding-bottom: 2px;
+  text-decoration: none;
+  display: inline-block;
+  color: var(--color-main);
+  font-weight: var(--font-medium);
+}
+
+.headerLogo > img {
+  height: 1.8rem;
+}
+
+img {
+  width: 100%;
+}

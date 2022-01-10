@@ -1,0 +1,318 @@
+main .pageTitleSection .btnAndTitle {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+main .singleBookieSummary.summarySection .cardValue {
+  font-size: 1.2rem;
+}
+
+main .singleBookieSummary.summarySection .summaryCard i {
+  font-size: 1.8rem;
+}
+
+main .bookieBetsTitleSection {
+  margin: 3rem 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+main .bookieBetsTitleSection .titleLine {
+  margin-right: 0.85rem;
+}
+
+main .bookieBetsTitleSection p.bookieBetsTitle {
+  font-weight: 500;
+}
+
+main .bookieBetsTitleSection .betTypes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding-left: 2rem;
+}
+
+main .bookieBetsTitleSection .betTypes a {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #67757c;
+  border: 1.5px solid #dde1e4;
+  border-radius: 4px;
+  text-align: center;
+  padding: 0.2rem 0.65rem;
+  text-decoration: none;
+  transition: 0.2s ease-in;
+}
+
+main .bookieBetsTitleSection .betTypes a.active {
+  color: #fff;
+  background-color: #5a6268;
+  border-color: #545b62;
+  pointer-events: none;
+}
+
+main .bookieBetsTitleSection .betTypes a:hover {
+  color: #fff;
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+main .bookieBetsSection {
+  padding-top: 0.5rem;
+}
+
+main .bookieBetsSection table {
+  border-spacing: 0 1.75rem !important;
+  border-collapse: separate;
+  background-color: transparent;
+  width: 100%;
+}
+
+main .bookieBetsSection table tr {
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+main .bookieBetsSection table th {
+  color: #999;
+  font-weight: 500;
+  vertical-align: bottom;
+  border: 0;
+}
+
+main .bookieBetsSection table th,
+main .bookieBetsSection table td {
+  padding: 1.75rem 1.5rem;
+}
+
+main .bookieBetsSection table th {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+main .bookieBetsSection table tbody tr {
+  transition: background-color 0.2s ease-in-out;
+  background-color: #fff;
+}
+
+main .bookieBetsSection table tbody tr:hover {
+  background-color: #fafafa;
+}
+
+main .bookieBetsSection table td {
+  font-size: 0.87rem;
+  border: 0 solid #eee;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+main .bookieBetsSection table td,
+main .bookieBetsSection table td p {
+  font-weight: 500;
+  color: #67757c;
+}
+
+main .bookieBetsSection table td p {
+  padding: 0.15rem 0;
+}
+
+main .bookieBetsSection table tbody p.open {
+  color: #455a6499;
+}
+
+main .bookieBetsSection table tbody p.won {
+  color: #5ec152;
+}
+
+main .bookieBetsSection table tbody p.lost {
+  color: #ef5350;
+}
+
+main .bookieBetsSection table tbody p.amount {
+  font-weight: 400;
+}
+
+main .bookieBetsSection table tbody td p.matchup {
+  position: relative;
+}
+
+main .bookieBetsSection table tbody td p.matchup::before {
+  pointer-events: none;
+  content: attr(data-tooltip);
+  position: absolute;
+  opacity: 0;
+  top: -41px;
+  left: 0%;
+  min-width: 140px;
+  text-align: center;
+  font-size: 0.75rem;
+  background-color: #fff;
+  box-shadow: 1px 2px 7px rgb(0 0 0 / 8%);
+  border-radius: 2px;
+  padding: 8px 6px;
+  color: #777;
+  font-weight: 500;
+  transition: 0.2s all ease;
+}
+
+main .bookieBetsSection table tbody td p.matchup::after {
+  pointer-events: none;
+  opacity: 0;
+  content: "";
+  position: absolute;
+  left: 16%;
+  bottom: 25px;
+  width: 0;
+  height: 0;
+  margin-left: -7px;
+  border-color: hsla(0, 0%, 100%, 0.95) transparent transparent;
+  border-style: solid;
+  border-width: 7px 7px 0;
+  transition: 0.2s all ease;
+}
+
+main .bookieBetsSection table tbody td p.matchup:hover::before,
+main .bookieBetsSection table tbody td p.matchup:hover::after {
+  opacity: 1;
+}
+
+main .bookieBetsSection table tbody td p.matchup:hover {
+  cursor: help;
+}
+
+main .bookieBetsSection table tbody tr.open td {
+  padding: 2.42rem 1.5rem;
+}
+
+main .bookieBetsSection table .mobile {
+  display: none;
+}
+
+main .bookieBetsSection table tr.mobile.matchInfo .betInfos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  grid-row-gap: 1.5rem;
+}
+
+@media only screen and (max-width: 950px) {
+  main .bookieBetsSection table thead {
+    display: none;
+  }
+
+  main .bookieBetsSection table .mobile.matchInfo {
+    display: none;
+  }
+
+  main .bookieBetsSection table td {
+    border: 0 solid #fff;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  main .bookieBetsSection table .desktop {
+    display: none;
+  }
+
+  main .bookieBetsSection table tr.mobile {
+    display: table-row;
+  }
+
+  main .bookieBetsSection table tr.mobile.dateLeague {
+    background-color: transparent;
+  }
+
+  main .bookieBetsSection table tr.mobile.dateLeague td {
+    padding: 2.25rem 0 5px 4px;
+    display: block;
+    width: 100%;
+  }
+
+  main .bookieBetsSection table tr.mobile.dateLeague td p {
+    padding: 0;
+  }
+
+  main .bookieBetsSection table tr.mobile.dateLeague:hover {
+    background-color: transparent;
+  }
+
+  main .bookieBetsSection table {
+    border-spacing: 0 0 !important;
+  }
+
+  main .bookieBetsSection {
+    padding: 0;
+  }
+
+  main .bookieBetsTitleSection {
+    margin-bottom: 0px;
+  }
+}
+
+@media only screen and (max-width: 795px) {
+  main .bookieBetsSection table tr.matchData {
+    display: none;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo {
+    display: table-cell;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo td {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo .result .value {
+    margin-bottom: -1.2rem;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo .title {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 1px;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo .value {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  main .bookieBetsSection table tr.mobile.matchInfo .betInfos {
+    grid-template-columns: repeat(2, 1fr);
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  main .bookieBetsSection table tr.mobile.matchInfo .betInfos {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  main .pageTitleSection {
+    display: block;
+  }
+
+  main .pageTitleSection .btnAndTitle {
+    margin-bottom: 1rem;
+  }
+
+  main .pageTitleSection .accentButton {
+    padding: 0.6rem 0.9rem;
+  }
+}

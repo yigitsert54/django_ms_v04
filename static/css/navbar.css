@@ -1,0 +1,362 @@
+header {
+  background: var(--mainColor);
+  position: fixed;
+  display: block;
+  width: 100%;
+  box-shadow: 0 3px 5px rgb(0 0 0 / 15%);
+  z-index: 10;
+}
+
+.headerContent {
+  min-height: var(--navHeight);
+  max-width: var(--maxWidth);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header ul.headerMenu {
+  display: inline-flex;
+  align-items: center;
+  list-style: none;
+  gap: var(--navGap);
+}
+
+li.navItem {
+  position: relative;
+}
+
+li.navItem a,
+li.navItem p {
+  color: #b3bfce;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+li.navItem a:hover,
+li.navItem p:hover {
+  color: #fff;
+}
+
+li.navItem p {
+  display: flex;
+  align-items: center;
+}
+
+li.navItem p i {
+  font-size: 1.1rem;
+  margin-left: 0.25rem;
+}
+
+li.navItem i.notify {
+  color: #f64e60;
+  font-size: 0.7rem;
+}
+
+li.navItem i.mobile.notify {
+  color: #f64e60;
+  font-size: 0.9rem;
+  margin-left: 0.33rem;
+}
+
+.navItem .logBtn {
+  background-color: var(--secColor);
+  padding: 0.55rem 1.4rem;
+  border-radius: 4px;
+  border: none;
+  width: fit-content;
+  height: fit-content;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.navItem .logBtn:hover {
+  background-color: #3a3f51;
+}
+
+.headerMenu.desktop .navItem .dropdown {
+  list-style: none;
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--mainColor);
+  background-clip: padding-box;
+
+  padding: 0.65rem 0;
+  min-width: 12rem;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  text-align: center;
+
+  z-index: 1000;
+  box-shadow: 0px 0px 15px 0px rgb(82 63 105 / 5%);
+  transition: 0.2s all ease;
+
+  opacity: 0;
+  transform: translateY(-15px) translateX(-50%);
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.headerMenu.desktop .navItem .dropdown li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0.65rem 0;
+  width: 100%;
+  font-size: 0.88rem;
+  gap: 0.25rem;
+}
+
+.headerMenu.desktop .navItem .dropdown.active {
+  opacity: 1;
+  transform: translateY(0px) translateX(-50%);
+  pointer-events: auto;
+}
+
+/* mobile navigation */
+
+header .headerContent .mobileNavLines {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+header .headerContent .mobileNavLines.notify::after {
+  position: absolute;
+  content: "";
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: #f64e5f;
+  top: -7px;
+  right: -7px;
+}
+
+header .headerContent .mobileNavLines .navLine {
+  width: 30px;
+  height: 2px;
+  background-color: #a9b4c3;
+  display: inline-block;
+  opacity: 1;
+  transition: 0.4s all ease;
+}
+
+header .headerContent .mobileNavLines .navLine.bottom.active {
+  opacity: 0;
+}
+
+header .headerContent .mobileNavLines .navLine.top.active {
+  transform: rotate(45deg) translate(5px, 6px);
+  margin-right: 10px;
+}
+
+header .headerContent .mobileNavLines .navLine.middle.active {
+  transform: rotate(-45deg) translate(0px, 0px);
+  margin-right: 10px;
+}
+
+div.mobileNavContainer {
+  width: 0%;
+  height: 0%;
+  min-height: 0;
+  background-color: var(--mainColor);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: 0.4s all ease;
+  pointer-events: none;
+}
+
+div.mobileNavContainer.active {
+  width: 100%;
+  min-height: calc(100% - var(--navHeight));
+  position: fixed;
+  top: var(--navHeight);
+  z-index: 20;
+  opacity: 1;
+  pointer-events: auto;
+  overflow-y: scroll;
+}
+
+div.mobileNavContainer.active::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+  background-color: var(--mainColor);
+}
+
+nav ul.headerMenu.mobile {
+  display: none;
+  padding: 20px 0;
+}
+
+div.mobileNavContainer.active nav ul.headerMenu.mobile {
+  display: block;
+}
+
+nav ul.headerMenu.mobile .navItem {
+  list-style: none;
+  text-align: center;
+  padding: 24px 0;
+}
+
+nav ul.headerMenu.mobile .navItem.logBtn {
+  padding-bottom: 25px;
+}
+
+nav ul.headerMenu.mobile .navItem p {
+  justify-content: center;
+}
+
+nav ul.headerMenu.mobile .navItem a,
+nav ul.headerMenu.mobile .navItem p {
+  font-size: 1.2rem;
+}
+
+nav ul.headerMenu.mobile ul.dropdown {
+  margin-top: 20px;
+  padding: 0;
+  background-color: var(--secColor);
+}
+
+nav ul.headerMenu.mobile ul.dropdown li a {
+  padding: 20px 0;
+}
+
+nav ul.headerMenu.mobile ul.dropdown.closed {
+  max-height: 0;
+  overflow: hidden;
+}
+
+nav ul.headerMenu.mobile ul.dropdown.closed li {
+  opacity: 0;
+}
+
+nav ul.headerMenu.mobile ul.dropdown {
+  max-height: 192px;
+  transition: 0.5s all ease;
+}
+
+nav ul.headerMenu.mobile ul.dropdown li {
+  opacity: 1;
+  transition: 0.5s all ease;
+}
+
+/* bottom navbar */
+
+nav.bottomNavbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--accentColor);
+  padding: 1rem 0;
+  box-shadow: 0 1px 15px rgb(0 0 0 / 20%);
+  z-index: 10;
+}
+
+nav.bottomNavbar ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0 1rem;
+  gap: 3.5rem;
+}
+
+nav.bottomNavbar ul li {
+  text-align: center;
+}
+
+nav.bottomNavbar ul li a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+nav.bottomNavbar ul li a.active {
+  color: var(--mainColor);
+  pointer-events: none;
+}
+
+nav.bottomNavbar ul li a i {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+nav.bottomNavbar ul li a p {
+  margin-top: 3px;
+}
+
+@media only screen and (max-width: 930px) {
+  nav ul.headerMenu.desktop {
+    display: none;
+  }
+
+  header .headerContent .mobileNavLines {
+    display: flex;
+  }
+
+  nav.bottomNavbar {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  nav.bottomNavbar ul {
+    gap: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  nav.bottomNavbar ul {
+    gap: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  :root {
+    --navHeight: 60px !important;
+  }
+
+  nav.bottomNavbar ul li a {
+    font-size: 0.7rem;
+    letter-spacing: 0.3px;
+  }
+
+  nav.bottomNavbar ul li a i {
+    font-size: 1rem;
+  }
+
+  nav.bottomNavbar ul li a p {
+    margin-top: 0px;
+  }
+
+  nav.bottomNavbar ul {
+    gap: 1.7rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  nav.bottomNavbar ul {
+    gap: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  nav.bottomNavbar ul {
+    gap: 0.75rem;
+  }
+}

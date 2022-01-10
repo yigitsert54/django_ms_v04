@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+
+{% block page_name %}
+{{page_name}}
+{% endblock page_name %}
+
+{% block content %}
+
+<hr>
+Anzahl Wetten: {{bet_count}} | Gewonnen: {{wins}} | Winrate: {{winrate}}% | Bilanz: {{profit}}
+<hr style="margin-bottom: 20px;">
+
+{% for bet in bets %}
+    
+    <div style="margin-bottom: 10px;">
+        {{bet.match.date|datetimeformat}} - {{bet.match.league}} - {{bet.match.home_team}} -
+        {{bet.match.away_team}} - {{bet.bet_type}} - {{bet.odd}} - {{bet.stake}} -
+        {{bet.bookie.name}} - {{bet.match.home_goals}} - {{bet.match.away_goals}} - {{bet.result}}
+        
+    </div>
+
+{% endfor %}
+
+{% endblock content %}

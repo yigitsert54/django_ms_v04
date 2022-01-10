@@ -1,0 +1,340 @@
+:root {
+  --mainColor: #313544;
+  --secColor: #40465a;
+  --accentColor: #4490fa;
+  --linkColor: #0099ff;
+  --cardTitleColor: #455a64;
+
+  --maxWidth: 1080px;
+  --navHeight: 75px;
+
+  --loginTopPadding: 25px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5d9ffb;
+}
+
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+  background-color: #eee;
+}
+
+* {
+  margin: 0rem;
+  font-family: Quicksand, sans-serif;
+  font-weight: 400;
+}
+
+main {
+  background-color: var(--mainColor);
+}
+
+main .mainContent {
+  max-width: var(--maxWidth);
+  margin: 0 auto;
+  min-height: calc(100vh - 2 * var(--loginTopPadding));
+  background-color: var(--mainColor);
+  padding: var(--loginTopPadding) 15px;
+}
+
+header {
+  display: none !important;
+}
+
+main .mainContent .logoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0 3rem;
+}
+
+main .mainContent .formSection {
+  display: flex;
+  justify-self: center;
+}
+
+main .mainContent .formSection .loginCard {
+  flex: 0 0 360px;
+  padding: 1.5rem 1.25rem;
+  background-color: #fff;
+  margin: 0 auto 1.9rem;
+  border: 1px solid #eee;
+  border-top: none;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+main .mainContent .loginForm p.loginTitle {
+  font-weight: 500;
+  color: var(--cardTitleColor);
+  margin-bottom: 1.25rem;
+}
+
+main .mainContent .loginForm input.formInput,
+main .mainContent .loginForm div.resetEmail input#id_email,
+main .mainContent .loginForm div.resetEmail input#id_new_password1,
+main .mainContent .loginForm div.resetEmail input#id_new_password2 {
+  width: 100%;
+
+  background-image: linear-gradient(#5d9ffb, #5d9ffb),
+    linear-gradient(#31354420, #31354420);
+  background-position: bottom, 50% calc(100% - 1px);
+  background-repeat: no-repeat;
+  background-size: 0 2px, 100% 1px;
+  transition: background 0s ease-out 0s;
+
+  border: 0;
+
+  color: #495057;
+  min-height: 35px;
+  font-size: 0.9rem;
+
+  padding: 0;
+  margin-bottom: 1.75rem;
+}
+
+main .mainContent .loginForm input.formInput:focus,
+main .mainContent .loginForm div.resetEmail input#id_email:focus,
+main .mainContent .loginForm div.resetEmail input#id_new_password1:focus,
+main .mainContent .loginForm div.resetEmail input#id_new_password2:focus {
+  background-image: linear-gradient(#5d9ffb, #5d9ffb),
+    linear-gradient(#31354420, #31354420);
+  background-size: 100% 2px, 100% 1px;
+  outline: 0 none;
+  transition-duration: 0.5s;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+}
+
+main .mainContent .loginForm .forgotPasswordSection {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  margin-bottom: 1.95rem;
+}
+
+main .mainContent .loginForm .forgotPasswordSection a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #343a40;
+  font-weight: 500;
+}
+
+main .mainContent .loginForm .forgotPasswordSection a:hover {
+  color: #343a40c0;
+}
+
+main .mainContent .loginForm .forgotPasswordSection a i {
+  margin-right: 0.4rem;
+  font-size: 1rem;
+}
+
+main .mainContent .loginForm input.formSubmit {
+  width: 100%;
+  cursor: pointer;
+  padding: 0.85rem 1.5rem;
+  margin-bottom: 2.4rem;
+
+  background: #398bf7;
+  border: 1px solid #398bf7;
+  border-radius: 60px;
+
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.25rem;
+
+  transition: 0.2s ease-in;
+}
+
+main .mainContent .loginForm input.formSubmit:focus {
+  background-color: #028ee1;
+  border: 1px solid #028ee1;
+}
+
+main .mainContent .loginForm input.formSubmit:active {
+  background-color: #117a8b;
+  border-color: #10707f;
+}
+
+main .mainContent .loginCard .notHaveAccount {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+main .mainContent .loginCard .notHaveAccount p {
+  color: #67757c;
+  margin-bottom: 0.4rem;
+}
+
+main .mainContent .loginCard .notHaveAccount a.register {
+  text-decoration: none;
+  font-weight: 700;
+  color: #398bf7;
+  padding: 4px;
+}
+
+main .mainContent .loginCard .notHaveAccount a.register:hover,
+main .mainContent .loginCard .notHaveAccount a.register:active {
+  color: #117a8b;
+}
+
+main .mainContent .loginFooterSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 0 1rem;
+  color: #fff;
+}
+
+main .mainContent .loginFooterSection p,
+main .mainContent .loginFooterSection a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+main .mainContent .loginFooterSection .madeIn,
+main .mainContent .loginFooterSection .legalData {
+  flex: 0 0 50%;
+  max-width: 50%;
+  text-align: center;
+}
+
+main .mainContent .loginFooterSection .legalData p a {
+  font-weight: 500;
+  margin: 0 0.5rem;
+}
+
+main .mainContent .loginFooterSection .madeIn p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .mainContent .loginFooterSection .madeIn p img {
+  margin-right: 0.6rem;
+}
+
+div.messageSektion {
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  transition: 0.5s all ease;
+  top: 0;
+}
+
+div.messageSektion.base {
+  display: none;
+}
+
+div.messageSektion.close {
+  top: -10%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+div.messageSektion div.message {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+div.messageSektion div.message p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.8rem 2.5rem;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+div.messageSektion div.message p i {
+  font-size: 1.3rem;
+  margin-left: 1.5rem;
+  cursor: pointer;
+}
+
+div.messageSektion div.message p.error {
+  background-color: #ef5350;
+}
+
+main .mainContent .loginForm div.resetEmail input#id_email {
+  margin-bottom: 1.2rem;
+}
+
+main .mainContent .loginForm input.formSubmit.resetEmailSubmit {
+  background-color: #3a3f51;
+  border-color: #3a3f51;
+  font-size: 0.9rem;
+  width: auto;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 0.45rem 0.75rem;
+  margin-bottom: 1.3rem;
+}
+
+main .mainContent .loginForm input.formSubmit.resetEmailSubmit:hover,
+main .mainContent .loginForm input.formSubmit.resetEmailSubmit:focus,
+main .mainContent .loginForm input.formSubmit.resetEmailSubmit:focus {
+  color: #fff;
+  background-color: #23272b;
+  border-color: #1d2124;
+}
+
+main .mainContent .loginForm .forgotPasswordSection.back2Login {
+  justify-content: start;
+  margin-bottom: 1.5rem;
+}
+
+main .mainContent .loginForm .forgotPasswordSection.back2Login a {
+  font-size: 0.85rem;
+}
+
+main .mainContent .loginForm .forgotPasswordSection.back2Login a i {
+  padding-top: 1px;
+}
+
+main .mainContent .formSection .loginCard.resetSent {
+  flex: 0 0 66.6666666666%;
+}
+
+main .mainContent .formSection .loginCard.resetSent p {
+  font-size: 0.95rem;
+  padding-bottom: 0.3rem;
+}
+
+main .mainContent .formSection .loginCard.resetSent p.loginTitle {
+  margin-bottom: 0.7rem;
+}
+
+main .mainContent .formSection .loginCard.resetSent p.p2 {
+  padding-top: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+main .mainContent .resetSent.loginForm .forgotPasswordSection.back2Login {
+  margin: 0;
+}
+
+main .mainContent .resetSent.loginForm .forgotPasswordSection.back2Login a {
+  font-size: 0.9rem;
+}
+
+body div.footer {
+  display: none;
+}
+
+body nav.bottomNavbar {
+  display: none;
+}
+
+@media only screen and (max-width: 450px) {
+  main .mainContent .formSection .loginCard {
+    flex: 0 0 85%;
+  }
+}

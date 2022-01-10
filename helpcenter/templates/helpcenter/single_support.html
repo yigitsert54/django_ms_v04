@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+
+<!-- Bookie Crud Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bookieCrud.css' %}"/>
+
+<!-- Support Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/support.css' %}"/>
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection">
+
+        <p class="pageTitle">Support</p>
+    </div>
+    <!-- End pageTitle Section -->
+
+    <div class="dashboardCard singleSupportCard">
+
+        <!-- subject -->
+        <p class="title">Betreff</p>
+        <p class="value">{{support.subject}}</p>
+
+        <!-- question -->
+        <p class="title">Deine Frage</p>
+        <p class="value">{{support.question}}</p>
+        
+        <!-- answer -->
+        <p class="title">Antwort</p>
+
+        {% if support.answer|length > 0 %}
+            <p class="value">{{support.answer}}</p>
+        {% else %}
+            <p class="value notAnswered">Deine Anfrage wird zurzeit bearbeitet...</p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock content %}

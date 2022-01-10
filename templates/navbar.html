@@ -1,0 +1,219 @@
+{% load static %}
+
+<header>
+
+    <div class="headerContent">
+        <div class="logoSection">
+            <p class="logo" style="color:#a9b4c3; font-size: 22px;">MATCHSNIPER</p>
+        </div>
+
+        <nav> 
+            <ul class="headerMenu desktop">
+
+                <li class="navItem">
+                    <a href="{% url 'dashboard' %}" class="navLink">Dashboard</a>
+                </li>
+                
+                <li class="navItem">
+                    <a href="{% url 'value_bets' %}" class="navLink">Value Wetten</a>
+                </li>
+
+                <li class="navItem">
+                    <a href="{% url 'performance' %}" class="navLink">Performance</a>
+                </li>
+
+                <li class="navItem hasDropdown">
+
+                    <p href="" class="navLink">Account <i class="ri-arrow-down-s-line"></i></p>
+
+                    <ul class="dropdown">
+
+                        <li>
+                            <a href="{% url 'bookies' %}">Wettanbieter</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'bets' 'all' %}">Meine Wetten</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'settings' %}">Einstellungen</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="navItem hasDropdown">
+
+                    <p href="" class="navLink">Help Center
+                        {% if request.user.account.has_unseen_answers %}
+                            <i class="ri-checkbox-blank-circle-fill dropdownArrow notify"></i>
+                        {% else %}
+                            <i class="ri-arrow-down-s-line dropdownArrow"></i>
+                        {% endif %}
+                    </p>
+
+                    <ul class="dropdown">
+
+                        <li>
+                            <a href="">Academy</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'faq' %}">FAQ</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'support' %}">
+                                Support
+                                {% if request.user.account.has_unseen_answers %}
+                                    <i class="ri-checkbox-blank-circle-fill dropdownArrow notify"></i>
+                                {% endif %}
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li class="navItem">
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="navLink logBtn">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="navLink logBtn">Login</a>
+                    {% endif %}
+                </li>
+                
+            </ul>
+        </nav>
+        
+        <div class="mobileNavLines {% if request.user.account.has_unseen_answers %}notify{% endif %}">
+            <span class="navLine top"></span>
+            <span class="navLine middle"></span>
+            <span class="navLine bottom"></span>
+        </div>
+    </div>
+
+</header>
+
+<div class="mobileNavContainer">
+
+    <nav> 
+
+        <ul class="headerMenu mobile">
+
+            <li class="navItem">
+                <a href="{% url 'dashboard' %}" class="navLink">Dashboard</a>
+            </li>
+            
+            <li class="navItem">
+                <a href="{% url 'value_bets' %}" class="navLink">Value Wetten</a>
+            </li>
+
+            <li class="navItem">
+                <a href="{% url 'performance' %}" class="navLink">Performance</a>
+            </li>
+
+            <li class="navItem hasDropdown">
+
+                <p href="" class="navLink">Account <i class="ri-arrow-down-s-line"></i></p>
+                
+                <ul class="dropdown closed">
+
+                    <li>
+                        <a href="{% url 'bookies' %}">Wettanbieter</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'bets' 'all' %}">Meine Wetten</a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'settings' %}">Einstellungen</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="navItem hasDropdown">
+
+                <p href="" class="navLink">
+                    Help Center
+                    {% if request.user.account.has_unseen_answers %}
+                        <i class="ri-checkbox-blank-circle-fill mobile notify"></i>
+                    {% else %}
+                        <i class="ri-arrow-down-s-line"></i>
+                    {% endif %}
+                </p>
+
+                <ul class="dropdown closed">
+
+                    <li>
+                        <a href="">Academy</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'faq' %}">FAQ</a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'support' %}">
+                            Support
+                            {% if request.user.account.has_unseen_answers %}
+                                <i class="ri-checkbox-blank-circle-fill mobile notify"></i>
+                            {% endif %}
+                        </a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <li class="navItem logBtn">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="navLink logBtn">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="navLink logBtn">Login</a>
+                {% endif %}
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+<nav class="bottomNavbar">
+    <ul class="menu">
+
+        <li class="navitem">
+            <a href="{% url 'dashboard' %}" class="navLink {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                <i class="ri-dashboard-line"></i>
+                <p>Dashboard</p>
+            </a>
+        </li>
+
+        <li class="navitem">
+            <a href="{% url 'value_bets' %}" class="navLink {% if request.resolver_match.url_name == 'value_bets' %}active{% endif %}">
+                <i class="ri-bar-chart-line"></i>
+                <p>Value Wetten</p>
+            </a>
+        </li>
+
+        <li class="navitem">
+            <a href="{% url 'bookies' %}" class="navLink {% if request.resolver_match.url_name == 'bookies' %}active{% endif %}">
+                <i class="ri-book-open-line"></i>
+                <p>Wettanbieter</p>
+            </a>
+        </li>
+
+        <li class="navitem">
+            <a href="{% url 'bets' 'all' %}" class="navLink {% if request.resolver_match.url_name == 'bets' %}active{% endif %}">
+                <i class="ri-list-unordered"></i>
+                <p>Meine Wetten</p>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+<!-- load navbar javaScript -->
+<script src="{% static 'js/navbar.js' %}" charset="utf-8"></script>

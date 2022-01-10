@@ -1,0 +1,149 @@
+main .bookieBetsTitleSection.myBetsPage {
+  margin: 0rem 0 1rem;
+}
+
+main .bookieBetsTitleSection.myBetsPage .title {
+  display: flex;
+  align-items: center;
+}
+
+main .bookieBetsSection.myBetsPage table tbody tr.open td {
+  padding: 0rem 1.5rem;
+}
+
+main .bookieBetsSection table tr.mobile.matchInfo .betInfos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+  grid-row-gap: 1.5rem;
+}
+
+@media only screen and (max-width: 1080px) {
+  main .bookieBetsTitleSection.myBetsPage {
+    margin-bottom: 0;
+  }
+
+  main .bookieBetsSection table thead {
+    display: none;
+  }
+
+  main .bookieBetsSection table .mobile.matchInfo {
+    display: none;
+  }
+
+  main .bookieBetsSection table td {
+    border: 0 solid #fff;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  main .bookieBetsSection table .desktop {
+    display: none;
+  }
+
+  main .bookieBetsSection table tr.mobile {
+    display: table-row;
+  }
+
+  main .bookieBetsSection table tr.mobile.dateLeague {
+    background-color: transparent;
+  }
+
+  main .bookieBetsSection table tr.mobile.dateLeague td {
+    padding: 2.25rem 0 5px 4px;
+    display: block;
+    width: 100%;
+  }
+
+  main .bookieBetsSection table tr.mobile.dateLeague td p {
+    padding: 0;
+  }
+
+  main .bookieBetsSection table tr.mobile.dateLeague:hover {
+    background-color: transparent;
+  }
+
+  main .bookieBetsSection table {
+    border-spacing: 0 0 !important;
+  }
+
+  main .bookieBetsSection {
+    padding: 0;
+  }
+
+  main .bookieBetsTitleSection {
+    margin-bottom: 0px;
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  main .bookieBetsSection table tr.matchData {
+    display: none;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo {
+    display: table-cell;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo td {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo .result .value {
+    margin-bottom: -1.2rem;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo .title {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 1px;
+  }
+
+  main .bookieBetsSection table tr.mobile.matchInfo .value {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  main .bookieBetsSection table tr.mobile.matchInfo .betInfos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  main .bookieBetsTitleSection {
+    display: block;
+  }
+
+  main .bookieBetsTitleSection .betTypes {
+    justify-content: start;
+    padding-left: 0;
+    padding-top: 1.5rem;
+  }
+
+  main .bookieBetsTitleSection .bookieBetsTitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  main .bookieBetsSection table tr.mobile.matchInfo .betInfos {
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 1.5rem;
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  main .bookieBetsSection table tr.mobile.matchInfo .betInfos {
+    width: 100%;
+  }
+}

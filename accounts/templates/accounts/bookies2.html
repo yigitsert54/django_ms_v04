@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+
+<!-- Bookies Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bookies.css' %}"/>
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection">
+
+        <p class="pageTitle">Wettanbieter - {{request.user.account.total_balance}}€</p>
+
+        <div class="buttonSection">
+            
+            <!-- Deposit Money Button -->
+            <a href="{% url 'add_bookie' %}" class="accentButton">
+                <i class="ri-add-line"></i>
+                <p>hinzufügen</p>
+            </a>
+
+        </div>
+
+    </div>
+    <!-- End pageTitle Section -->
+
+    <!-- Bookies Sektion -->
+    <div class="allBookiesSection">
+
+        {% for bookie in bookies %}
+            <!-- Single Bookie Card -->
+            <div class="dashboardCard bookieCard" data-bookie-url="{% url 'single_bookie' bookie.id %}">
+                
+                <div class="bookieNameColumn">
+                    <span class="titleLine"></span>
+                    <div>
+                        <p class="bookieName">{{bookie.name.capitalize}}</p>
+
+                        {% if bookie.bet_set.count > 0 %}
+                            <p class="bookieMatches">{{bookie.bet_set.all.count}} Wetten ({{bookie.finished_bets.count}} abgeschl.)</p>
+                        {% else %}
+                            <p class="bookieMatches">Keine Wetten</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <div class="bookieBalance">
+                    <p class="balance">{{bookie.balance}}€</p>
+                    <p class="balanceSub">Wettkapital</p>
+                </div>
+
+                <div class="bookieActions">
+                    <a href="{% url 'single_bookie' bookie.id %}" data-tooltip="Ansehen"><i class="ri-eye-fill"></i></a>
+                    <a href="{% url 'deposit_money' bookie.id %}" data-tooltip="Einzahlen"><i class="ri-login-circle-line"></i></a>
+                    <a href="{% url 'withdraw_money' bookie.id %}" data-tooltip="Auszahlen"><i class="ri-logout-circle-r-line"></i></a>
+                </div>
+
+            </div>
+        {% endfor %}
+
+        <!-- Add New Bookie Card -->
+        <div class="dashboardCard addbookieCard">
+            <a href="{% url 'add_bookie' %}" class="addBookieButton">
+                <i class="ri-add-line"></i>
+                Wettanbieter hinzufügen
+            </a>
+        </div>
+        
+
+    </div>
+    <!-- End Bookies Sektion -->
+
+</div>
+
+<!-- load bookies page javaScript -->
+<script src="{% static 'js/bookies.js' %}" charset="utf-8"></script>
+
+{% endblock content %}

@@ -1,0 +1,322 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+    
+{% endblock styles %}
+
+
+{% block content %}
+
+<div class="mainContent">
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection">
+
+        <p class="pageTitle">Willkommen, {{request.user.account.first_name.capitalize}} - {{request.user.account.total_balance}}€</p>
+
+    </div>
+    <!-- End pageTitle Section -->
+
+    <!-- Summary Section -->
+    <div class="summarySection">
+
+        <div class="dashboardCard summaryCard">
+            <i class="im im-stackoverflow"></i>
+            <div class="summaryItems">
+                <p class="cardTitle">Anzahl Wetten</p>
+                <p class="cardValue">{{performance.bet_count}}</p>
+            </div>
+
+        </div>
+        
+        <div class="dashboardCard summaryCard">
+            <i class="im im-award"></i>
+            <div class="summaryItems">
+                <p class="cardTitle">Gewonnen</p>
+                <p class="cardValue">{{performance.wins}}</p>
+            </div>
+
+        </div>
+
+        <div class="dashboardCard summaryCard">
+            <i class="im im-pie-chart"></i>
+            <div class="summaryItems">
+                <p class="cardTitle">Winrate</p>
+                <p class="cardValue">{{performance.winrate}}%</p>
+            </div>
+
+        </div>
+
+        <div class="dashboardCard summaryCard">
+            <i class="im im-credit-card"></i>
+            <div class="summaryItems">
+                <p class="cardTitle">Bilanz</p>
+                <p class="cardValue">{{performance.profit_sign}}{{performance.profit}}€</p>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- End Summary Section -->
+
+    <!-- Performance & Bookie Section Section -->
+    <div class="performanceBookieSection">
+
+        <!-- Performance Card -->
+        <div class="dashboardCard performanceCard">
+
+            <div class="titleSection">
+                <p class="cardTitle"><span class="titleLine"></span> Meine Performance</p>
+                <a href="{% url 'performance' %}" class="desktopLink">detaillierte Performance</a>
+                <a href="{% url 'performance' %}" class="mobileLink"><i class="ri-external-link-fill"></i></a>
+            </div>
+
+            <canvas class="desktop" id="performanceChart"></canvas>
+            <canvas class="mobile" id="performanceChart2"></canvas>
+            
+
+            <!-- Performance-Chart Script-->
+            <script>
+                var ctx = document.getElementById('performanceChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: {{performance_chart.labels|safe}},
+                        datasets: [
+                            {
+                                label: 'Bilanz',
+                                data: {{performance_chart.data|safe}},
+                                backgroundColor:'#5d9ffb22',
+                                borderColor: '#5d9ffb',
+                                fill: true,
+                                tension: 0.3,
+                                borderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                            }             
+                        ]
+                        },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                // display: false
+                            },
+                            x: {
+                                ticks: {
+                                    display: false
+                                }
+                            },
+                        },
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            </script>
+
+            <script>
+                var ctx = document.getElementById('performanceChart2').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: {{performance_chart.labels|safe}},
+                        datasets: [
+                            {
+                                label: 'Bilanz',
+                                data: {{performance_chart.data|safe}},
+                                backgroundColor:'#5d9ffb22',
+                                borderColor: '#5d9ffb',
+                                fill: true,
+                                tension: 0.3,
+                                borderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                            }             
+                        ]
+                        },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                // display: false
+                                ticks: {
+                                    display: false
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    display: false
+                                }
+                            },
+                        },
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            </script>
+
+        </div>
+
+        <!-- Bookies Card --> 
+        <div class="dashboardCard bookieCard">
+
+            <div class="titleSection">
+                <p class="cardTitle"><span class="titleLine"></span> Top Wettanbieter</p>
+                <a href="{% url 'bookies' %}" class="desktopLink">alle Wettanbieter anzeigen</a>
+                <a href="{% url 'bookies' %}" class="mobileLink"><i class="ri-external-link-fill"></i></a>
+            </div>
+
+            <table class="topBookies dashboardTable">
+
+                <!-- Top Bookies Table --> 
+                <thead>
+
+                    <tr>
+                        <th class="title">Wettanbieter</th>
+                        <th class="value">Wettkapital</th>
+                        <th class="value desktop2">Wetten ges.</th>
+                        <th class="value desktop1">Wetten abgeschl.</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    
+                    {% for bookie in bookies|slice:"5" %}
+                    <!-- Table Row --> 
+                    <tr>
+                        <td class="title"><a href="">{{bookie.name.capitalize}}</a></td>
+                        <td class="value">{{bookie.balance}}€</td>
+                        <td class="value desktop2">{{bookie.bet_set.all.count}}</td>
+                        <td class="value desktop1">{{bookie.finished_bets.count}}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+    <!-- End Performance & Bookie Section Section -->
+
+    <!-- matchesSection Section -->
+    <div class="matchesSection">
+
+        <!-- valueMatches Card -->
+        <div class="dashboardCard valueMatchesCard">
+
+            <div class="titleSection">
+                <p class="cardTitle"><span class="titleLine"></span> Aktuelle Value Wetten ({{value_bets|length}})</p>
+                <a href="{% url 'value_bets' %}" class="desktopLink">alle Value Wetten anzeigen</a>
+                <a href="{% url 'value_bets' %}" class="mobileLink"><i class="ri-external-link-fill"></i></a>
+            </div>
+
+            {% if value_bets|length == 0 %}
+
+                <p class="noBetAvailible">Aktuell keine Value-Wetten verfügbar!</p>
+
+            {% else %}
+
+                <!-- valueMatches Table -->
+                <table class="valueMatches dashboardTable">
+
+                    <thead>
+
+                        <tr>
+                            <th class="title">Datum</th>
+                            <th class="title">Begegnung</th>
+                            <th class="title desktop2">Wette</th>
+                            <th class="title desktop1">Quote</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for bet in value_bets|slice:"6" %}
+                            <!-- Table Row --> 
+                            <tr>
+                                <td class="value">{{bet.date}}</td>
+                                <td class="value">{{bet.home_team}} - {{bet.away_team}}</td>
+                                <td class="value desktop2">{{bet.bet}}</td>
+                                <td class="value desktop1">{{bet.odd}}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% endif %}
+
+        </div>
+
+        <!-- openMatches Card -->
+        <div class="dashboardCard openMatchesCard">
+
+            <div class="titleSection">
+                <p class="cardTitle"><span class="titleLine"></span> Offene Wetten ({{open_bets|length}})</p>
+                <a href="{% url 'bets' 'open' %}" class="desktopLink openbetsLinkDesktop">alle offenen Wetten anzeigen</a>
+                <a href="{% url 'bets' 'open' %}" class="mobileLink openbetsLinkMobile"><i class="ri-external-link-fill"></i></a>
+            </div>
+
+            {% if open_bets|length == 0 %}
+
+                <p class="noBetAvailible">Aktuell keine offenen Wetten!</p>
+
+            {% else %}
+
+                <table class="openMatches dashboardTable">
+
+                    <thead>
+                        <tr>
+                            <th class="title">Datum</th>
+                            <th class="title">Begegnung</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for bet in open_bets|slice:"5" %}
+                            <!-- Table Row --> 
+                            <tr>
+                                <td class="value">{{bet.match.date|datetimeformat}}</td>
+                                <td class="value">{{bet.match.home_team}} - {{bet.match.away_team}}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% endif %}
+
+        </div>
+    </div>
+    <!-- End matchesSection Section -->
+
+</div>
+
+<!-- load dashboard javaScript -->
+<script src="{% static 'js/dashboard.js' %}" charset="utf-8"></script>
+
+{% endblock %}

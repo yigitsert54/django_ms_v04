@@ -1,0 +1,424 @@
+main .valueBetsSection {
+  padding-top: 1rem;
+}
+
+main .valueBetsSection table {
+  border-spacing: 0 1.75rem !important;
+  border-collapse: separate;
+  background-color: transparent;
+  width: 100%;
+}
+
+main .valueBetsSection table tr {
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+main .valueBetsSection table th {
+  color: #999;
+  font-weight: 500;
+  vertical-align: bottom;
+  border: 0;
+}
+
+main .valueBetsSection table th,
+main .valueBetsSection table td {
+  padding: 1.5rem 1rem;
+}
+
+main .valueBetsSection table th {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+main .valueBetsSection table tbody tr {
+  transition: background-color 0.2s ease-in-out;
+  background-color: #fff;
+}
+
+main .valueBetsSection table tbody tr:hover {
+  background-color: #fafafa;
+}
+
+main .valueBetsSection table td {
+  font-size: 0.87rem;
+  border: 0 solid #eee;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+main .valueBetsSection table td,
+main .valueBetsSection table td p {
+  font-weight: 500;
+  color: #67757c;
+}
+
+main .valueBetsSection table td p {
+  padding: 0.15rem 0;
+}
+
+main .valueBetsSection .valuebetActions {
+  display: flex;
+  align-items: center;
+  transition: all 0.35s ease-in-out;
+}
+
+main .valueBetsSection .valuebetActions button {
+  background: none;
+  border: none;
+}
+
+main .valueBetsSection .valuebetActions.betActions {
+  transform: translate(0, 56%);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+main .valueBetsSection .valuebetActions.saveActions {
+  transform: translate(0, 56%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+main .valueBetsSection .valuebetActions.saveActions i {
+  font-size: 1.3rem;
+}
+
+main .valueBetsSection .valuebetActions.saveActions i.save {
+  color: #5ec152;
+}
+
+main .valueBetsSection .valuebetActions.saveActions i.cancel {
+  color: #ef5350;
+}
+
+main .valueBetsSection td.active .valuebetActions.betActions {
+  transform: translate(0px, -38%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+main .valueBetsSection td.active .valuebetActions.saveActions {
+  transform: translate(0px, -38%);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+main .valueBetsSection .valuebetActions a,
+main .valueBetsSection .valuebetActions span,
+main .valueBetsSection .valuebetActions button {
+  text-decoration: none;
+  position: relative;
+  padding: 0 0.4rem;
+}
+
+main .valueBetsSection .valuebetActions a::before,
+main .valueBetsSection .valuebetActions span::before,
+main .valueBetsSection .valuebetActions button::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  display: none;
+  top: -38px;
+  left: 50%;
+  width: 140px;
+  margin-left: -70px;
+  text-align: center;
+  font-size: 0.8rem;
+  background-color: #fff;
+  box-shadow: 2px 3px 10px rgb(0 0 0 / 15%);
+  border-radius: 4px;
+  padding: 6px 6px;
+  color: #777;
+  font-weight: 500;
+}
+
+main .valueBetsSection .valuebetActions a::after,
+main .valueBetsSection .valuebetActions span::after,
+main .valueBetsSection .valuebetActions button::after {
+  display: none;
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  width: 0;
+  height: 0;
+  margin-left: -7px;
+  border-color: hsla(0, 0%, 100%, 0.95) transparent transparent;
+  border-style: solid;
+  border-width: 7px 7px 0;
+}
+
+main .valueBetsSection .valuebetActions a:hover::before,
+main .valueBetsSection .valuebetActions a:hover::after,
+main .valueBetsSection .valuebetActions span:hover::before,
+main .valueBetsSection .valuebetActions span:hover::after,
+main .valueBetsSection .valuebetActions button:hover::before,
+main .valueBetsSection .valuebetActions button:hover::after {
+  display: block;
+}
+
+main .valueBetsSection .valuebetActions i {
+  font-size: 1.2rem;
+  color: #bbb;
+  cursor: pointer;
+}
+
+main .valueBetsSection .valuebetActions i:hover {
+  color: var(--accentColor);
+}
+
+main .valueBetsSection table .mobile {
+  display: none;
+}
+
+main .valueBetsSection table tr.mobile {
+  background-color: transparent;
+}
+
+main .valueBetsSection table tr.mobile.dateLeague:hover {
+  background-color: transparent;
+}
+
+main .valueBetsSection table tr.mobile td {
+  padding: 2rem 0 3px 5px;
+}
+
+main .valueBetsSection table tr.mobile.matchInfo .betInfos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  grid-row-gap: 1.5rem;
+}
+
+main .valueBetsSection table tr.mobile.matchInfo .betButtons {
+  position: relative;
+}
+
+main .valueBetsSection table tr.mobile.matchInfo .betButtons .first,
+main .valueBetsSection table tr.mobile.matchInfo .betButtons .second {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+main .valueBetsSection table tr.mobile.matchInfo .betButtons .first .leagueBtn {
+  background-color: #5a6268;
+  transition: 0.2s ease all;
+}
+
+main
+  .valueBetsSection
+  table
+  tr.mobile.matchInfo
+  .betButtons
+  .first
+  .leagueBtn:active,
+main
+  .valueBetsSection
+  table
+  tr.mobile.matchInfo
+  .betButtons
+  .first
+  .leagueBtn:focus {
+  transform: scale(0.8);
+}
+
+main .valueBetsSection table tr.mobile.matchInfo .betButtons .betBtn {
+  text-decoration: none;
+  background: #5d9ffb;
+  color: #fff;
+  padding: 0.65rem 1.2rem;
+  border-radius: 4px;
+  border: 0;
+  font-weight: 500;
+}
+
+main .valueBetsSection table tr.mobile.matchInfo .betButtons .cancelBet {
+  color: #ef5350;
+  font-weight: 500;
+  font-size: 1.6rem;
+  vertical-align: center;
+}
+
+main .valueBetsSection table tr.mobile.matchInfo .betButtons .second {
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s ease-out all;
+  transform: translateY(10px);
+}
+
+main table tr.mobile.matchInfo .betButtons .second .submitBet {
+  background-color: #5ec152;
+  transition: 0.2s ease all;
+}
+
+main table tr.mobile.matchInfo .betButtons .second .submitBet:active,
+main table tr.mobile.matchInfo .betButtons .second .submitBet:focus {
+  transform: scale(0.8);
+}
+
+main table tr.mobile.matchInfo .betButtons .first .saveBet {
+  transition: 0.4s ease-out all;
+}
+
+main table tr.mobile.matchInfo .betButtons.active .first .saveBet {
+  transform: translateY(-47px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+main table tr.mobile.matchInfo .betButtons.active .second {
+  transform: translateY(-37px);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media only screen and (max-width: 930px) {
+  main .valueBetsSection table {
+    border-spacing: 0 0 !important;
+  }
+
+  main .valueBetsSection table thead {
+    display: none;
+  }
+
+  main .valueBetsSection table .desktop {
+    display: none;
+  }
+
+  main .valueBetsSection table tr.mobile {
+    display: table-row;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo {
+    display: none;
+  }
+
+  main .valueBetsSection {
+    padding-top: 0;
+  }
+
+  main .valueBetsSection table td {
+    border: 0 solid #fff;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  main .valueBetsSection table .matchData {
+    display: none;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo {
+    background-color: #fff;
+    display: table-row;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo:hover {
+    background-color: #fafafa;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo td {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo td {
+    text-align: center;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo .title {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 1px;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo .value {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo .betButtons {
+    display: block;
+  }
+
+  main .valueBetsSection .valuebetActions.betActions {
+    transform: translateX(50%);
+  }
+
+  main .valueBetsSection td.active .valuebetActions.betActions {
+    transform: translateX(-50%);
+  }
+
+  main .valueBetsSection .valuebetActions.saveActions {
+    transform: translateX(50%);
+  }
+
+  main .valueBetsSection td.active .valuebetActions.saveActions {
+    transform: translateX(-50%);
+  }
+
+  main .valueBetsSection .valuebetActions i {
+    font-size: 1.4rem;
+  }
+
+  main .valueBetsSection .valuebetActions.saveActions i {
+    font-size: 1.5rem;
+  }
+
+  main .valueBetsSection .valuebetActions a,
+  main .valueBetsSection .valuebetActions span,
+  main .valueBetsSection .valuebetActions button {
+    padding: 0 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  main .valueBetsSection table tr.mobile.matchInfo .betInfos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo .betInfos :first-child {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  main .valueBetsSection table tr.mobile.matchInfo .betInfos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo .betInfos :first-child {
+    grid-column-start: 1;
+    grid-column-end: 1;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  main table tr.mobile.matchInfo .betButtons .first .leagueBtn,
+  main table tr.mobile.matchInfo .betButtons .first .saveBet {
+    padding: 0.65rem 0.9rem;
+  }
+
+  main .valueBetsSection table tr.mobile.matchInfo .betButtons .second {
+    gap: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  main table tr.mobile.matchInfo .betButtons .first .leagueBtn,
+  main table tr.mobile.matchInfo .betButtons .first .saveBet {
+    padding: 0.65rem 0.75rem;
+  }
+}

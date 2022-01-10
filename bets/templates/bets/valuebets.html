@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block page_name %}
+{{page_name}}
+{% endblock page_name %}
+
+{% block content %}
+
+{% for bet in value_bets %}
+
+<div style="margin-bottom: 25px;">
+    {{bet.date}} - {{bet.league}} - {{bet.home_team}} - {{bet.away_team}} - {{bet.bet}} - {{bet.odd}} - {{bet.stake}} - {{bet.bookie}}
+    
+    <form action="" method="POST">
+        {%csrf_token%}
+        <input type="hidden" name="match_id" value="{{bet.match_id}}">
+        <input type="hidden" name="date" value="{{bet.date}}">
+        <input type="hidden" name="league" value="{{bet.league}}">
+        <input type="hidden" name="home_team" value="{{bet.home_team}}">
+        <input type="hidden" name="away_team" value="{{bet.away_team}}">
+        <input type="hidden" name="bet" value="{{bet.bet}}">
+        <input type="hidden" name="odd" value="{{bet.odd}}">
+        <input type="hidden" name="stake" value="{{bet.stake}}">
+        <input type="hidden" name="bookie" value="{{bet.bookie}}">
+        <input type="submit" value="Save Bet">
+    </form>
+</div>
+
+{% endfor %}
+
+{% endblock content %}

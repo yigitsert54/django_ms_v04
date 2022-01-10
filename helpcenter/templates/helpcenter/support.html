@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+
+<!-- Bookie Crud Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bookieCrud.css' %}"/>
+
+<!-- Support Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/support.css' %}"/>
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+
+        <!-- pageTitle Section -->
+        <div class="pageTitleSection">
+
+            <p class="pageTitle">Support</p>
+        </div>
+        <!-- End pageTitle Section -->
+
+        <!-- form Section  -->
+        <div class="formSection supportFormSection">
+
+            <div class="dashboardCard formCard">
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+            
+                    {% for field in form %}
+
+                    <div class="formLabel">
+                        <label for="id_{{field.name}}">{{field.label}}</label>
+                    </div>
+
+                    <div class="formField">
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="formButtons">
+                        <input class="formSubmit" type="submit" value="Absenden">
+                    </div>
+                </form>
+                
+            </div>
+
+        </div>
+        <!-- End form Section  -->
+
+        {% if support_requests|length > 0 %}
+            <div class="requestTitleSection">
+                <span class="titleLine"></span>
+                <p>Deine Anfragen</p>
+            </div>
+        {% endif %}
+
+        <!-- Request Section -->
+        <div class="requestSection">
+
+            {% for r in support_requests %}
+
+            <div class="dashboardCard supportCard">
+
+                <div class="supportContent">
+                
+                    <div class="supportData">
+                        <div class="supportHeader">
+                            <p class="requestDate">
+                                {% if r.created.day < 10 %}
+                                    
+                                    {% if r.created.month < 10 %}
+                                        0{{r.created.day}}.0{{r.created.month}}.{{r.created.year}}
+                                    {% else %}
+                                        0{{r.created.day}}.{{r.created.month}}.{{r.created.year}}
+                                    {% endif %}
+            
+                                {% else %}
+            
+                                    {% if r.created.month < 10 %}
+                                        {{r.created.day}}.0{{r.created.month}}.{{r.created.year}}
+                                    {% else %}
+                                        {{r.created.day}}.{{r.created.month}}.{{r.created.year}}
+                                    {% endif %}
+            
+                                {% endif %}
+
+                                {% if r.answered and not r.seen %}
+                                <a href="{% url 'single_support' r.id %}" class="notification">neu</a>
+                                {% endif %}
+                            </p>
+                            {% if r.seen %}
+                                <span class="mobile status done">erledigt</span>
+                            {% elif r.answered %}
+                                <span class="mobile status answered">beantwortet</span>
+                            {% else %}
+                                <span class="mobile status open">offen</span>
+                            {% endif %}
+                        </div>
+                        <p class="subject">{{r.subject|truncatechars:66}}</p>
+                        <p class="question">{{r.question|truncatechars:140}}</p>
+                    </div>
+                    <div class="supportActions">
+
+                        {% if r.seen %}
+                            <span class="desktop status done">erledigt</span>
+                        {% elif r.answered %}
+                            <span class="desktop status answered">beantwortet</span>
+                        {% else %}
+                            <span class="desktop status open">offen</span>
+                        {% endif %}
+                        
+                        <a href="{% url 'single_support' r.id %}" class="showSupport">Mehr anzeigen</a>
+                    </div>
+
+                </div>
+                
+                
+            </div>
+
+            {% endfor %}
+
+        </div>
+        <!-- End Request Section -->
+
+
+</div>
+
+{% endblock content %}

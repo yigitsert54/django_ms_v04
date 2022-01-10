@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block page_name %}
+{{page_name}}
+{% endblock page_name %}
+
+{% block content %}
+
+<p class="totalBalance">Wettkapital: <span>{{balance}}€</span> (insgesamt verfügbar)</p>
+
+<!-- Bookie Sektion -->
+<div class="bookieSection">
+
+    <!-- Add New Bookie Card -->
+    <a href="{% url 'add_bookie' %}" class="dashboardCard bookieCard addBookie">
+        <i class='bx bxs-plus-circle'></i>
+    </a>
+
+
+    {% for bookie in bookies %}
+    <!-- Single Bookie Card -->
+    <div class="bookieCard dashboardCard">
+
+        <div class="titleSection">
+            <p class="cardTitle">{{bookie.name.capitalize}}</p>
+        </div>
+
+        <p class="balance">
+            {{bookie.balance}}€
+        </p>
+
+        <div class="balanceDivider"></div>
+
+        <div class="bookieLinks">
+            <a href="{% url 'single_bookie' bookie.id %}" class="bookieLink" data-tooltip="Weitere Informationen">
+                <i class='bx bx-info-circle'></i>
+            </a>
+
+            <a href="{% url 'deposit_money' bookie.id %}" class="bookieLink" data-tooltip="Geld einzahlen">
+                <i class='bx bx-plus-circle'></i>
+            </a>
+
+            <a href="{% url 'withdraw_money' bookie.id %}" class="bookieLink" data-tooltip="Geld auszahlen">
+                <i class='bx bx-minus-circle'></i>
+            </a>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+<!-- End Bookie Sektion --> 
+
+{% endblock content %}

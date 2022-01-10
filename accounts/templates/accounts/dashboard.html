@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+
+
+{% block content %}
+<!-- Summary Sektion --> 
+<div class="summarySektion">
+
+    <!-- Single Summary Card --> 
+    <div class="summaryCard dashboardCard">
+
+        <div class="iconSection">
+            <i class='bx bx-hash summaryIcon'></i>
+        </div>
+
+        <div class="summaryItem">
+            <p class="cardTitle">Anzahl Wetten</p>
+            <p class="summaryValue">{{performance.bet_count}}</p>
+        </div>
+    </div>
+
+    <!-- Single Summary Card --> 
+    <div class="summaryCard dashboardCard">
+
+        <div class="iconSection">
+            <i class='bx bxs-up-arrow summaryIcon'></i>
+        </div>
+
+        <div class="summaryItem">
+            <p class="cardTitle">Gewonnen</p>
+            <p class="summaryValue">{{performance.wins}}</p>
+        </div>
+    </div>
+
+    <!-- Single Summary Card --> 
+    <div class="summaryCard dashboardCard">
+
+        <div class="iconSection">
+            <i class='bx bx-loader-alt summaryIcon'></i>
+        </div>
+        
+        <div class="summaryItem">
+            <p class="cardTitle">Winrate</p>
+            <p class="summaryValue">{{performance.winrate}}%</p>
+        </div>
+    </div>
+
+    <!-- Single Summary Card --> 
+    <div class="summaryCard dashboardCard">
+
+        <div class="iconSection">
+            <i class='bx bx-euro summaryIcon'></i>
+        </div>
+
+        <div class="summaryItem">
+            <p class="cardTitle">Bilanz</p>
+            <p class="summaryValue">{{performance.profit_sign}}{{performance.profit}}€</p>
+        </div>
+    </div>
+
+</div>
+<!-- End Summary Sektion --> 
+
+<!-- Performance Sektion --> 
+<div class="performanceBookieSection">
+    
+    <!-- Performance Card --> 
+    <div class="performanceCard dashboardCard">
+        
+        <div class="titleSection">
+            <p class="cardTitle">Meine Performance</p>
+            <a href="{% url 'performance' %}" class="seeMoreLink">Detaillierte Performance</a>
+        </div>
+
+        <canvas id="performanceChart"></canvas>
+
+        <!-- Performance-Chart Script-->
+        <script>
+            var ctx = document.getElementById('performanceChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: {{performance_chart.labels|safe}},
+                    datasets: [
+                        {
+                            label: 'Bilanz',
+                            data: {{performance_chart.data|safe}},
+                            backgroundColor:'#ffd36950',
+                            borderColor: '#ffd369',
+                            fill: true,
+                            tension: 0.3,
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            pointHitRadius: 7,
+                        }             
+                    ]
+                    },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false;
+                            display: false;
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        </script>
+            
+    </div>
+
+    <!-- Bookie Card --> 
+    <div class="bookiesCard dashboardCard">
+        
+        <div class="titleSection">
+            <p class="cardTitle">Wettanbieter</p>
+            <a href="" class="seeMoreLink">Wettanbieter anzeigen</a>
+        </div>
+
+        <!-- barChart-->
+        <div class="bookieChart">
+            <canvas id="bookieBarChart"></canvas>
+        
+            <!-- Chartscript barChart-->
+            <script>
+                var ctx = document.getElementById('bookieBarChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["Tipico", "bet365", "Unibet"],
+                        datasets: [
+                            {
+                                label: 'Eingezahlt',
+                                data: [456, 234, 345],
+                                backgroundColor: '#ffd36950',
+                                borderColor: '#ffd369',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Aktueller Stand',
+                                data: [567, 123, 456],
+                                backgroundColor: ['#00F66F50', '#FF000050', '#00F66F50'],
+                                borderColor: ['#00F66F', '#FF0000', '#00F66F'],
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                
+                            },
+                            
+                        },
+                        plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                    }
+                });
+                    
+            </script>
+        </div>
+        
+    </div>
+
+</div>
+<!-- End Performance Sektion --> 
+
+<!-- Matches Sektion --> 
+<div class="matchesSektion">
+
+    <!-- valueMatches Card -->
+    <div class="valueMatchesCard dashboardCard">
+
+        <div class="titleSection">
+            <p class="cardTitle">Aktuelle Value-Wetten ({{value_bets|length}})</p>
+            <a href="{% url 'value_bets' %}" class="seeMoreLink">Alle Value-Wetten</a>
+        </div>
+
+        {% if value_bets|length == 0 %}
+
+        <p class="noBetAvailible">Aktuell keine Value-Wetten verfügbar!</p>
+
+        {% else %}
+
+        <!-- valueMatches Table -->
+        <table>
+            <thead>
+                <!-- table head -->
+                <tr>
+                    <th class="firstElement">Datum</th>
+                    <th>Begegnung</th>
+                    <th>Wette</th>
+                    <th>Quote</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for bet in value_bets|slice:"6" %}
+                <!-- table row -->
+                <tr>
+                    <td class="firstElement">{{bet.date}}</td>
+                    <td>{{bet.home_team}} - {{bet.away_team}}</td>
+                    <td>{{bet.bet}}</td>
+                    <td>{{bet.odd}}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        {% endif %}
+    </div>
+    
+    <!-- openMatches Card -->
+    <div class="openMatchesCard dashboardCard">
+        
+        <div class="titleSection">
+            <p class="cardTitle">Offene Wetten ({{open_bets|length}})</p>
+            <a href="{% url 'bets' 'open' %}" class="seeMoreLink">Alle offenen Wetten</a>
+        </div>
+        
+        {% if open_bets|length == 0 %}
+
+        <p class="noBetAvailible">Aktuell keine offenen Wetten!</p>
+
+        {% else %}
+
+        <!-- openMatches Table -->
+        <table>
+            <thead>
+                <!-- table head -->
+                <tr>
+                    <th class="firstElement">Datum</th>
+                    <th>Begegnung</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for bet in open_bets|slice:"5" %}
+                <!-- table row -->
+                <tr>
+                    <td class="firstElement">{{bet.match.date|datetimeformat}}</td>
+                    <td>{{bet.match.home_team}} - {{bet.match.away_team}}</td>
+                </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endif %}
+        
+    </div>
+</div>
+<!-- End Matches Sektion -->
+{% endblock %}

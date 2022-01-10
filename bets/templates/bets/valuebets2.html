@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Valuebets Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/valuebets.css' %}"/>
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection">
+
+        <p class="pageTitle">Value Wetten - {{request.user.account.total_balance}}€</p>
+
+    </div>
+    <!-- End pageTitle Section -->
+
+    <!-- Value Bets Section -->
+    <div class="valueBetsSection">
+
+        {% if value_bets|length == 0 %}
+            <p class="noBetAvailible">Aktuell keine Value-Wetten verfügbar!</p>
+        {% else %}
+            <!-- Value Bets Table -->
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Datum & Liga</th>
+                        <th>Begegnung</th>
+                        <th>Wettanbieter</th>
+                        <th>Wette</th>
+                        <th>Quote</th>
+                        <th>Einsatz</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for bet in value_bets %}
+                        <tr class="mobile dateLeague">
+                            <td>
+                                <p>{{bet.date}}</p>
+                                <p>{{bet.league_string}}</p>
+                            </td>
+                        </tr>
+
+                        <tr class="matchData">
+                            <td class="desktop">
+                                <p>{{bet.date}}</p>
+                                <p>{{bet.league_string}}</p>
+                            </td>
+                            <td>{{bet.home_team}} - {{bet.away_team}}</td>
+                            <td>{{bet.bookie.capitalize}}</td>
+                            <td>{{bet.bet_string}}</td>
+                            <td>{{bet.odd}}</td>
+                            <td>{{bet.stake}}€</td>
+                            <td>
+                                <div class="valuebetActions betActions">
+                                    <a href="{{bet.league_url}}" target="_blank" data-tooltip="Jetzt wetten"><i class="ri-external-link-fill"></i></a>
+                                    <span class="saveBet" data-tooltip="Wette speichern"><i class="ri-save-fill"></i></span>
+                                </div>
+                                <div class="valuebetActions saveActions">
+                                    <form action="" method="POST">
+                                        {%csrf_token%}
+                                        <input type="hidden" name="match_id" value="{{bet.match_id}}">
+                                        <input type="hidden" name="date" value="{{bet.date}}">
+                                        <input type="hidden" name="league" value="{{bet.league}}">
+                                        <input type="hidden" name="home_team" value="{{bet.home_team}}">
+                                        <input type="hidden" name="away_team" value="{{bet.away_team}}">
+                                        <input type="hidden" name="bet" value="{{bet.bet}}">
+                                        <input type="hidden" name="odd" value="{{bet.odd}}">
+                                        <input type="hidden" name="stake" value="{{bet.stake}}">
+                                        <input type="hidden" name="bookie" value="{{bet.bookie}}">
+                                        <button type="submit" data-tooltip="Speichern"><i class="ri-check-fill save"></i></button>
+                                    </form>
+                                    <span class="saveBet" data-tooltip="Abbrechen"><i class="ri-close-fill cancel"></i></span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="mobile matchInfo">
+                            <td>
+                                <div class="matchup">
+                                    <p class="title">Begegnung</p>
+                                    <p class="value">{{bet.home_team}} - {{bet.away_team}}</p>
+                                </div>
+
+
+                                <div class="betInfos">
+
+                                    <div class="bet">
+                                        <p class="title">Wette</p>
+                                        <p class="value">{{bet.bet_string}}</p>
+                                    </div>
+
+                                    <div class="odd">
+                                        <p class="title">Quote</p>
+                                        <p class="value">{{bet.odd}}</p>
+                                    </div>
+
+                                    <div class="bookie">
+                                        <p class="title">Wettanbieter</p>
+                                        <p class="value">{{bet.bookie.capitalize}}</p>
+                                    </div>
+
+                                    <div class="stake">
+                                        <p class="title">Einsatz</p>
+                                        <p class="value">{{bet.stake}}€</p>
+                                    </div>
+
+                                </div>
+                                
+
+                                <div class="mobile betButtons">
+                                    <div class="first">
+                                        <a href="{{bet.league_url}}" target="_blank" class="betBtn leagueBtn">Jetzt Wetten</a>
+                                        <span class="betBtn saveBet">Wette speichern</span>
+                                    </div>
+                                    <div class="second">
+                                        <form action="" method="POST">
+                                            {%csrf_token%}
+                                            <input type="hidden" name="match_id" value="{{bet.match_id}}">
+                                            <input type="hidden" name="date" value="{{bet.date}}">
+                                            <input type="hidden" name="league" value="{{bet.league}}">
+                                            <input type="hidden" name="home_team" value="{{bet.home_team}}">
+                                            <input type="hidden" name="away_team" value="{{bet.away_team}}">
+                                            <input type="hidden" name="bet" value="{{bet.bet}}">
+                                            <input type="hidden" name="odd" value="{{bet.odd}}">
+                                            <input type="hidden" name="stake" value="{{bet.stake}}">
+                                            <input type="hidden" name="bookie" value="{{bet.bookie}}">
+                                            <button type="submit" class="betBtn submitBet">Speichern</button>
+                                        </form>
+                                        <i class="ri-close-fill cancelBet"></i>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+        {% endif %}
+
+    </div>
+    <!-- End Value Bets Section -->
+
+</div>
+
+<!-- load valuebets page javaScript -->
+<script src="{% static 'js/valuebets.js' %}" charset="utf-8"></script>
+
+{% endblock content %}

@@ -1,0 +1,117 @@
+main .pageTitleSection.addBookie {
+  justify-content: start;
+}
+
+main .formSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+main .formSection form div.formLabel {
+  padding: 0 0 0.6rem;
+}
+
+main .formSection form div.formLabel label {
+  font-size: 0.9rem;
+  color: var(--cardTitleColor);
+  font-weight: 700;
+}
+
+main .formSection form select option.disabled {
+  display: none;
+}
+
+main .formSection form div.formField .input {
+  color: var(--cardTitleColor);
+  display: initial;
+  font-size: 0.85rem;
+  margin-bottom: 1.75rem;
+  min-width: 17rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: 0.3s all ease;
+}
+
+/* substract left & right padding from min-with of invested_stake input */
+main .formSection form div.formField .input#id_invested_stake {
+  min-width: calc(17rem - 2 * 0.75rem);
+}
+
+main .formSection form div.formField .input:focus {
+  box-shadow: none;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  font-weight: 500;
+}
+
+main .formSection form .formButtons {
+  display: flex;
+  align-items: center;
+}
+
+main .formSection form .formSubmit {
+  cursor: pointer;
+  font-weight: 500;
+  color: #fff;
+  background: #5d9ffb;
+  padding: 0.5rem 1.2rem;
+  box-shadow: none;
+  border-radius: 4px;
+  border: 0px;
+  transition: 0.15s ease-in;
+  font-size: 0.88rem;
+}
+
+main .formSection form .formSubmit:hover {
+  background-color: var(--accentColor);
+}
+
+main .formSection form .formButtons a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #67757c;
+  border: 1.5px solid #dde1e4;
+  border-radius: 4px;
+  text-align: center;
+  padding: 0.45rem 1.2rem;
+  text-decoration: none;
+  transition: 0.15s ease-in;
+  margin-left: 0.5rem;
+}
+
+main .formSection form .formButtons a:hover {
+  color: #fff;
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+main .formSection form.moneyCrud div.formField .input {
+  margin-bottom: 0.5rem;
+}
+
+main .formSection form.moneyCrud p.maxAmount {
+  font-size: 0.85rem;
+  font: weight 400px;
+  color: #67757c;
+  margin: 0 0 1.25rem;
+}
+
+@media only screen and (max-width: 930px) {
+  main .formSection {
+    grid-template-columns: 5fr 3fr;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  main .formSection {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  main .formSection {
+    grid-template-columns: 100%;
+  }
+}

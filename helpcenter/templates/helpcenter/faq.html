@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<!-- Base Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/base.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}"/>
+
+<!-- Dashboard Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/faq.css' %}"/>
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="mainContent">
+
+    <!-- pageTitle Section -->
+    <div class="pageTitleSection">
+
+        <p class="pageTitle">Häufig gestellte Fragen</p>
+
+    </div>
+    <!-- End pageTitle Section -->
+
+    <!-- All Topics Section -->
+    <div class="topicSection">
+
+        {% for topic in topics %}
+
+            <div class="dashboardCard topicCard" data-topic-url="{% url 'single_topic' topic.id %}">
+
+                <div class="titleSection">
+                    <p class="cardTitle"><span class="titleLine"></span> {{topic}}</p>
+                </div>
+
+                <p class="description">{{topic.description}}</p>
+
+                <a href="{% url 'single_topic' topic.id %}" class="questionCount">{{topic.question_set.all.count}} Fragen</a>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+    <!-- End All Topics Section -->
+
+</div>
+
+<!-- load faq javaScript -->
+<script src="{% static 'js/faq.js' %}" charset="utf-8"></script>
+{% endblock content %}
